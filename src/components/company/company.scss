@@ -1,0 +1,42 @@
+$base-color: #262254;
+$text-lt: #fff;
+
+.company-item {
+  margin: 1rem 0.5rem;
+  padding-bottom: 0.5rem;
+  border: 1px solid #eee;
+
+  @media (min-width: 540px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0rem;
+    padding-right: 0.3rem;
+    margin: 0.5rem;
+  }
+
+  h3 {
+    background-color: $base-color;
+    color: $text-lt;
+    padding: 0.3rem 0;
+
+    @media (min-width: 540px) {
+      width: 200px;
+      padding: 1rem 0;
+    }
+  }
+
+  section {
+    margin: 0.7rem 0;
+    padding: 0 0.5rem;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: auto;
+    gap: 1rem;
+
+    @media (min-width: 540px) {
+      margin: 0;
+      gap: 0.4rem;
+    }
+  }
+}

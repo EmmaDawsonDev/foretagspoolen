@@ -1,0 +1,19 @@
+$base-color: #262254;
+$text-lt: #fff;
+
+header {
+  background-color: $base-color;
+  color: $text-lt;
+  height: 7rem;
+  display: grid;
+  text-transform: uppercase;
+
+  h1 {
+    font-size: 2rem;
+    align-self: center;
+
+    @media (min-width: 768px) {
+      font-size: 3rem;
+    }
+  }
+}
