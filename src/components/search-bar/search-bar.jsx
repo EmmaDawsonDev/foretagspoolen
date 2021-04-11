@@ -12,6 +12,7 @@ const SearchBar = ({ setSearch, searchTerm }) => {
         type="text"
         name="search"
         className="search-input"
+        placeholder="Företagsnamn"
         value={searchTerm}
         onChange={setSearch}
       />

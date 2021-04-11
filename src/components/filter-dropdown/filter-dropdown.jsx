@@ -5,7 +5,7 @@ import "./filter-dropdown.scss";
 const FilterDropdown = ({ filterCourses }) => {
   return (
     <section className="filter-dropdown">
-      <label htmlFor="filter-by-course">Filtrera:</label>
+      <label htmlFor="filter-by-course">Filtrera</label>
 
       <select
         name="filter-by-course"

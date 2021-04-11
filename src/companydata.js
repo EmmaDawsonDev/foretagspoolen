@@ -12,7 +12,7 @@ const companyData = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, repudiandae.",
     ort: "Stockholm",
     synlig: true,
-    timestamp: 0,
+    timestamp: 3,
   },
   {
     id: 2,
@@ -27,7 +27,7 @@ const companyData = [
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo totam porro asperiores distinctio possimus? Dolorem.",
     ort: "Stockholm",
     synlig: true,
-    timestamp: 0,
+    timestamp: 10,
   },
   {
     id: 3,
@@ -41,7 +41,7 @@ const companyData = [
     beskrivning: "",
     ort: "Stockholm",
     synlig: true,
-    timestamp: 0,
+    timestamp: 1,
   },
   {
     id: 4,
@@ -55,7 +55,7 @@ const companyData = [
     beskrivning: "",
     ort: "Stockholm",
     synlig: true,
-    timestamp: 0,
+    timestamp: 6,
   },
   {
     id: 5,
@@ -69,7 +69,7 @@ const companyData = [
     beskrivning: "",
     ort: "Stockholm",
     synlig: true,
-    timestamp: 0,
+    timestamp: 19,
   },
   {
     id: 6,
@@ -83,7 +83,7 @@ const companyData = [
     beskrivning: "",
     ort: "Stockholm",
     synlig: true,
-    timestamp: 0,
+    timestamp: 14,
   },
   {
     id: 7,
@@ -97,7 +97,7 @@ const companyData = [
     beskrivning: "",
     ort: "Stockholm",
     synlig: true,
-    timestamp: 0,
+    timestamp: 4,
   },
   {
     id: 8,
@@ -111,7 +111,7 @@ const companyData = [
     beskrivning: "",
     ort: "Stockholm",
     synlig: true,
-    timestamp: 0,
+    timestamp: 11,
   },
   {
     id: 9,
@@ -125,7 +125,7 @@ const companyData = [
     beskrivning: "",
     ort: "Stockholm",
     synlig: true,
-    timestamp: 0,
+    timestamp: 21,
   },
   {
     id: 10,
@@ -140,7 +140,7 @@ const companyData = [
       "Skicka CV och kort personligt brev. + skicka med exempel på kod som du tycker är ballt. Viktigt med rätt mindset. Företaget jobbar enbart med Flutter, och detta får du upplärning inom om du inte kan.",
     ort: "Stockholm",
     synlig: true,
-    timestamp: 0,
+    timestamp: 12,
   },
 ];
 
