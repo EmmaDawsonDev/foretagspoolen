@@ -4,20 +4,16 @@ import BaseButton from "../base-button/base-button";
 
 import "./company.scss";
 
-const Company = () => {
+const Company = ({ data }) => {
   return (
     <li className="company-item">
-      <h3>Namn</h3>
+      <h3>{data.name}</h3>
       <section>
-        <p>WU </p>
-        <p>JSU</p>
-        <p>ITP</p>
-        <p>ITP</p>
-        <p>ITP</p>
-        <p>ITP</p>
-        <p>ITP</p>
+        {data.utbildningar.map((utbildning, index) => (
+          <p key={index}>{utbildning}</p>
+        ))}
       </section>
-      <BaseButton type="base">Mer info</BaseButton>
+      <BaseButton color="base">Mer info</BaseButton>
     </li>
   );
 };

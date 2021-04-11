@@ -19,9 +19,10 @@ $text-lt: #fff;
     background-color: $base-color;
     color: $text-lt;
     padding: 0.3rem 0;
+    font-size: 1rem;
 
     @media (min-width: 540px) {
-      width: 200px;
+      width: 12rem;
       padding: 1rem 0;
     }
   }
@@ -30,13 +31,25 @@ $text-lt: #fff;
     margin: 0.7rem 0;
     padding: 0 0.5rem;
     display: grid;
-    grid-template-columns: repeat(7, 1fr);
+    grid-template-columns: repeat(7, 25px);
     grid-template-rows: auto;
     gap: 1rem;
+
+    p {
+      font-size: 0.8rem;
+
+      @media (min-width: 768px) {
+        font-size: 1rem;
+      }
+    }
 
     @media (min-width: 540px) {
       margin: 0;
       gap: 0.4rem;
+    }
+
+    @media (min-width: 768px) {
+      gap: 1.7rem;
     }
   }
 }

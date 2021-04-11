@@ -1,0 +1,13 @@
+.filter-dropdown {
+  display: flex;
+  justify-content: space-between;
+  label {
+    padding-right: 0.3rem;
+  }
+
+  select {
+    background-color: #efeeff;
+    width: 60%;
+    height: 1.8rem;
+  }
+}

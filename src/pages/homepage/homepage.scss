@@ -2,4 +2,14 @@
   width: 100%;
   max-width: 700px;
   margin: 0 auto;
+
+  .search {
+    margin: 1.5rem 0;
+    text-align: left;
+    padding: 0 0.5rem;
+
+    & > * {
+      margin-top: 0.5rem;
+    }
+  }
 }

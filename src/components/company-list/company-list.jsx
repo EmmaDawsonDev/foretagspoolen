@@ -1,15 +1,17 @@
 import React from "react";
+import companyData from "../../companydata";
 
 import Company from "../company/company";
 
 import "./company-list.scss";
 
-const CompanyList = () => {
+const CompanyList = ({ companyData }) => {
+  //console.log("CL", companyData);
   return (
     <ul className="company-list">
-      <Company />
-      <Company />
-      <Company />
+      {companyData.map((company) => (
+        <Company key={company.id} data={company} />
+      ))}
     </ul>
   );
 };
