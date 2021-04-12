@@ -1,5 +1,4 @@
 import React from "react";
-import companyData from "../../companydata";
 
 import Company from "../company/company";
 

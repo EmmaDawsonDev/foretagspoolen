@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import BaseButton from "../base-button/base-button";
-
 import "./company.scss";
 
 const Company = ({ data }) => {

@@ -9,6 +9,7 @@ import "./App.css";
 
 function App() {
   const [companyData, setCompanyData] = useState(COMPANY_DATA);
+  console.log(setCompanyData);
 
   return (
     <div className="App">

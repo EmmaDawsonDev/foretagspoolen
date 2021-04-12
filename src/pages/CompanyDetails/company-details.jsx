@@ -7,33 +7,74 @@ import TheHeader from "../../components/the-header/the-header";
 const CompanyDetails = ({ companyData, match }) => {
   const data = companyData.find(
     (company) =>
-      company.namn.toLowerCase() == match.params.companyname.toLowerCase()
+      company.namn.toLowerCase() === match.params.companyname.toLowerCase()
   );
   console.log(data);
   return (
     <React.Fragment>
       <TheHeader title={match.params.companyname} />
-      <main>
+      <main className="company-details-wrapper">
         {data.beskrivning !== "" ? (
-          <section className="description">
-            <h4>Beskrivning:</h4>
-            <p>{data.beskrivning}</p>
+          <section className="description flex-wrapper">
+            <p>
+              <strong>Beskrivning:</strong> {data.beskrivning}
+            </p>
           </section>
         ) : null}
 
-        <section className="courses">
-          <h4>Utbildningar:</h4>
+        <section className="ort flex-wrapper">
+          <p>
+            <strong>Ort:</strong> {data.ort}
+          </p>
+        </section>
+        <section className="website flex-wrapper">
+          <p>
+            <strong>Hemsida:</strong>
+            <a href={data.hemsida} rel="noreferrer" target="_blank">
+              {data.hemsida}
+            </a>
+          </p>
+        </section>
+
+        <section className="courses flex-wrapper">
+          <strong>Utbildningar:</strong>
           {data.utbildningar.map((utbildning, index) => (
             <p key={index}>{utbildning}</p>
           ))}
         </section>
-        <section className="ITHS-matchar">
-          <h4>ITHS Matchar:</h4>
-          {data.ITHSMatchar === true ? <p>Ja</p> : <p>Nej</p>}
+        <section className="ITHS-matchar flex-wrapper">
           {data.ITHSMatchar === true ? (
-            <section>
-              <h4>ITHS Matchar detaljer:</h4>
-              <p>{data.ITHSMatcharBeskrivning}</p>
+            <p>
+              <strong>ITHS Matchar: </strong>Ja
+            </p>
+          ) : (
+            <p>
+              <strong>ITHS Matchar: </strong> Nej
+            </p>
+          )}
+        </section>
+        {data.ITHSMatchar === true ? (
+          <section className="ITHS-matchar-beskrivning flex-wrapper">
+            <p>
+              <strong>ITHS Matchar detaljer: </strong>
+              {data.ITHSMatcharBeskrivning}
+            </p>
+          </section>
+        ) : null}
+        <section className="contact ">
+          {data.kontaktEpost !== "" ? (
+            <section className="epost flex-wrapper">
+              <strong>Kontakta via e-post: </strong>
+              <a href={`mailto:${data.kontaktEpost}`}>{data.kontaktEpost}</a>
+            </section>
+          ) : null}
+
+          {data.kontaktWebbsida !== "" ? (
+            <section className="contact-website flex-wrapper">
+              <strong>Kontakta via webbsida: </strong>
+              <a href={data.kontaktWebbsida} rel="noreferrer" target="_blank">
+                {data.kontaktWebbsida}
+              </a>
             </section>
           ) : null}
         </section>
