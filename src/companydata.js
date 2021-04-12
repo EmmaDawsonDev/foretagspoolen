@@ -1,7 +1,7 @@
 const companyData = [
   {
     id: 1,
-    name: "ADDQ",
+    namn: "ADDQ",
     ITHSMatchar: false,
     ITHSMatcharBeskrivning: "",
     kontaktEpost: "ronn.elfors@addq.se",
@@ -16,7 +16,7 @@ const companyData = [
   },
   {
     id: 2,
-    name: "Apendo",
+    namn: "Apendo",
     ITHSMatchar: false,
     ITHSMatcharBeskrivning: "",
     kontaktEpost: "",
@@ -26,12 +26,12 @@ const companyData = [
     beskrivning:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo totam porro asperiores distinctio possimus? Dolorem.",
     ort: "Stockholm",
-    synlig: true,
+    synlig: false,
     timestamp: 10,
   },
   {
     id: 3,
-    name: "Carismar",
+    namn: "Carismar",
     ITHSMatchar: false,
     ITHSMatcharBeskrivning: "",
     kontaktEpost: "work@carismar.com",
@@ -45,7 +45,7 @@ const companyData = [
   },
   {
     id: 4,
-    name: "Edaider",
+    namn: "Edaider",
     ITHSMatchar: true,
     ITHSMatcharBeskrivning: "",
     kontaktEpost: "",
@@ -59,7 +59,7 @@ const companyData = [
   },
   {
     id: 5,
-    name: "EmbeddedArt AB",
+    namn: "EmbeddedArt AB",
     ITHSMatchar: false,
     ITHSMatcharBeskrivning: "",
     kontaktEpost: "rickard.randa-hedvall@embeddedart.se",
@@ -73,7 +73,7 @@ const companyData = [
   },
   {
     id: 6,
-    name: "HM",
+    namn: "HM",
     ITHSMatchar: true,
     ITHSMatcharBeskrivning: "",
     kontaktEpost: "",
@@ -87,7 +87,7 @@ const companyData = [
   },
   {
     id: 7,
-    name: "Goodminton",
+    namn: "Goodminton",
     ITHSMatchar: false,
     ITHSMatcharBeskrivning: "",
     kontaktEpost: "info@goodminton.se",
@@ -101,7 +101,7 @@ const companyData = [
   },
   {
     id: 8,
-    name: "iGoMoon",
+    namn: "iGoMoon",
     ITHSMatchar: false,
     ITHSMatcharBeskrivning: "",
     kontaktEpost: "goran.berggren@igomoon.com",
@@ -115,7 +115,7 @@ const companyData = [
   },
   {
     id: 9,
-    name: "Nibye",
+    namn: "Nibye",
     ITHSMatchar: false,
     ITHSMatcharBeskrivning: "",
     kontaktEpost: "alexandra@nibye.com",
@@ -129,7 +129,7 @@ const companyData = [
   },
   {
     id: 10,
-    name: "NS Ventures ",
+    namn: "NS Ventures ",
     ITHSMatchar: false,
     ITHSMatcharBeskrivning: "",
     kontaktEpost: "patrik.lindkvist@nsventures.se ",

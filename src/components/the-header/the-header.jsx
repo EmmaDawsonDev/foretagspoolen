@@ -2,10 +2,10 @@ import React from "react";
 
 import "./the-header.scss";
 
-const TheHeader = () => {
+const TheHeader = ({ title }) => {
   return (
     <header>
-      <h1>Företagspoolen</h1>
+      <h1>{title}</h1>
     </header>
   );
 };

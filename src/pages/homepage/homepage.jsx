@@ -29,10 +29,18 @@ const Homepage = (props) => {
     setSortBy(e.target.value);
   };
 
-  const filteredCompaniesBySearch = props.companyData.filter((company) =>
-    company.name.toLowerCase().includes(searchTerm.toLowerCase())
+  //Apply filters:
+  //Remove hidden companies from array
+  const filterCompaniesByVisible = props.companyData.filter(
+    (company) => company.synlig === true
   );
 
+  //Match by search term
+  const filteredCompaniesBySearch = filterCompaniesByVisible.filter((company) =>
+    company.namn.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  //Match by course
   const filteredCompanies =
     filterByCourse === ""
       ? filteredCompaniesBySearch
@@ -40,16 +48,17 @@ const Homepage = (props) => {
           company.utbildningar.includes(filterByCourse)
         );
 
+  //Sort filtered company list
   let filteredAndSorted = "";
 
   if (sortBy === "A-Ö") {
     filteredAndSorted = filteredCompanies.sort((a, b) =>
-      a.name.localeCompare(b.name)
+      a.namn.localeCompare(b.namn)
     );
   }
   if (sortBy === "Ö-A") {
     filteredAndSorted = filteredCompanies.sort((a, b) =>
-      b.name.localeCompare(a.name)
+      b.namn.localeCompare(a.namn)
     );
   }
   if (sortBy === "timestamp") {
@@ -60,7 +69,7 @@ const Homepage = (props) => {
 
   return (
     <React.Fragment>
-      <TheHeader />
+      <TheHeader title="Foretagspoolen" />
       <main className="homepage-wrapper">
         <section className="search">
           <SearchBar searchTerm={searchTerm} setSearch={setSearch} />
