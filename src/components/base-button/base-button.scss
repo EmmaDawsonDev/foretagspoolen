@@ -1,3 +1,7 @@
+$base-color: #262254;
+$base-color-lt: #efeeff;
+$text-lt: #fff;
+
 button {
   padding: 0.5rem;
 
@@ -8,5 +12,10 @@ button {
   border-radius: 3px;
   &.base {
     background-color: #dddaff;
+
+    &:hover {
+      background-color: $base-color;
+      color: $text-lt;
+    }
   }
 }

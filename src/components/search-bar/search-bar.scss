@@ -1,5 +1,6 @@
 .search-bar {
   display: flex;
+  align-items: center;
 
   .search-label {
     margin-right: 0.3rem;
@@ -9,5 +10,6 @@
     padding: 0.3rem;
     background-color: #efeeff;
     width: 100%;
+    border: 1px solid #dddaff;
   }
 }

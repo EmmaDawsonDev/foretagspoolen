@@ -1,0 +1,22 @@
+.sign-in {
+  max-width: 18rem;
+  margin: 3rem auto;
+
+  section {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    margin-bottom: 2rem;
+
+    label {
+      margin-bottom: 0.2rem;
+    }
+
+    input {
+      padding: 0.3rem;
+      background-color: #efeeff;
+      width: 100%;
+      border: 1px solid #dddaff;
+    }
+  }
+}
