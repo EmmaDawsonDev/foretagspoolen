@@ -1,11 +1,12 @@
 import React, { useState } from "react";
+//import * as Firebase from "./firebase/firebase.utils";
 
 import TheHeader from "../../components/the-header/the-header";
 import BaseButton from "../../components/base-button/base-button";
 
 import "./login.scss";
 
-const LoginPage = () => {
+const LoginPage = ({ handleSubmit }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,17 +20,12 @@ const LoginPage = () => {
     }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(email, password);
-  };
-
   return (
     <React.Fragment>
       <TheHeader title="Login" />
 
       <main className="sign-in">
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => handleSubmit(e, email, password)}>
           <section className="email">
             <label htmlFor="email">Email</label>
             <input

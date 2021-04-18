@@ -1,3 +1,7 @@
+$base-color: #262254;
+$base-color-lt: #efeeff;
+$text-lt: #fff;
+
 .company-details-wrapper {
   width: 100%;
   max-width: 700px;
@@ -26,6 +30,22 @@
   .courses {
     p {
       margin-left: 0.5rem;
+    }
+  }
+
+  .link-to-homepage {
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: $base-color;
+    background-color: $base-color-lt;
+    padding: 0.5rem;
+    border-radius: 3px;
+
+    &:hover {
+      background-color: $base-color;
+      color: $text-lt;
     }
   }
 }

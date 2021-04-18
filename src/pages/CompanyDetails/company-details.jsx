@@ -1,5 +1,5 @@
 import React from "react";
-//import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import "./company-details.scss";
 import TheHeader from "../../components/the-header/the-header";
@@ -79,6 +79,9 @@ const CompanyDetails = ({ companyData, match }) => {
               </section>
             ) : null}
           </section>
+          <Link to="/" className="link-to-homepage">
+            Hem
+          </Link>
         </main>
       ) : (
         <h3 className="loading">Loading...</h3>
