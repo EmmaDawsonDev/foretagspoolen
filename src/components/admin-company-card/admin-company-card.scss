@@ -1,0 +1,70 @@
+$base-color: #262254;
+$base-color-lt: #efeeff;
+$text-lt: #fff;
+
+.admin-company-item {
+  margin: 1rem 0.5rem;
+  padding-bottom: 0.5rem;
+  border: 1px solid #eee;
+
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    padding-bottom: 0rem;
+    padding-right: 0.3rem;
+    margin: 0.5rem 0;
+  }
+
+  h3 {
+    background-color: $base-color;
+    color: $text-lt;
+    padding: 0.3rem 0;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+
+    @media (min-width: 768px) {
+      width: 20%;
+      margin-bottom: 0;
+      padding: 1rem 0;
+    }
+  }
+
+  .company-info-wrapper {
+    padding: 0 0.5rem;
+
+    @media (min-width: 768px) {
+      flex-grow: 1;
+      flex-shrink: 0;
+    }
+  }
+
+  .courses-accepted {
+    display: flex;
+    flex-wrap: wrap;
+
+    p {
+      margin-left: 1rem;
+    }
+  }
+
+  .company-info {
+    text-align: left;
+
+    p {
+      margin-top: 0.5rem;
+    }
+  }
+
+  .buttons {
+    padding-top: 1rem;
+
+    @media (min-width: 768px) {
+      display: flex;
+      flex-direction: column;
+      width: 20%;
+
+      padding-top: 0.3rem;
+    }
+  }
+}

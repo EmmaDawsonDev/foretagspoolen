@@ -1,10 +1,11 @@
 $base-color: #262254;
 $base-color-lt: #efeeff;
 $text-lt: #fff;
+$danger: #ff9db2;
 
 button {
   padding: 0.5rem;
-
+  min-width: 7rem;
   text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: bold;
@@ -17,5 +18,22 @@ button {
       background-color: $base-color;
       color: $text-lt;
     }
+  }
+  &.danger {
+    background-color: $danger;
+
+    &:hover {
+      background-color: #a51635;
+      color: $text-lt;
+    }
+  }
+}
+
+button + button {
+  margin-left: 0.5rem;
+
+  @media (min-width: 768px) {
+    margin-top: 0.5rem;
+    margin-left: 0;
   }
 }
