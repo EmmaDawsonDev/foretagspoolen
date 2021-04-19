@@ -4,7 +4,7 @@ import BaseButton from "../base-button/base-button";
 
 import "./admin-company-card.scss";
 
-const AdminCompanyCard = ({ data }) => {
+const AdminCompanyCard = ({ data, toggleModal }) => {
   const kontaktadDatum = new Date(
     data.senastKontaktad.seconds * 1000
   ).toLocaleDateString();
@@ -47,8 +47,12 @@ const AdminCompanyCard = ({ data }) => {
         </section>
       </div>
       <div className="buttons">
-        <BaseButton color="base">Redigera</BaseButton>
-        <BaseButton color="danger">Radera</BaseButton>
+        <BaseButton color="base" toggleModal={toggleModal} data={data}>
+          Redigera
+        </BaseButton>
+        <BaseButton color="grey" toggleModal={toggleModal} data={data}>
+          Radera
+        </BaseButton>
       </div>
     </li>
   );

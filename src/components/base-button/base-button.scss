@@ -27,6 +27,12 @@ button {
       color: $text-lt;
     }
   }
+  &.grey {
+    &:hover {
+      background-color: #5c5c5c;
+      color: $text-lt;
+    }
+  }
 }
 
 button + button {

@@ -1,0 +1,27 @@
+.delete-modal {
+  background-color: #fff;
+  width: 18rem;
+  padding: 2rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+
+  @media (min-width: 540px) {
+    width: 30rem;
+  }
+
+  .buttons {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: center;
+
+    button + button {
+      @media (min-width: 768px) {
+        margin-top: 0rem;
+        margin-left: 0.5rem;
+      }
+    }
+  }
+}
