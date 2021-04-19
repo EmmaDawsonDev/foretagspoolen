@@ -27,7 +27,7 @@ const AdminCompanies = ({ companyData }) => {
         {companyData ? (
           <AdminCompanyList companyData={filteredCompaniesBySearch} />
         ) : (
-          <h6>Inga resultat</h6>
+          <h6>Loading...</h6>
         )}
       </main>
     </div>
