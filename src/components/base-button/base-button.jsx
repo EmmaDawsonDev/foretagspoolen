@@ -2,7 +2,7 @@ import React from "react";
 
 import "./base-button.scss";
 const BaseButton = (props) => {
-  //console.log(props.data);
+  console.log(props.data);
   return (
     <button
       className={props.color}

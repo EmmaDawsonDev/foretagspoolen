@@ -5,6 +5,7 @@ import SearchBar from "../../components/search-bar/search-bar";
 import BaseButton from "../../components/base-button/base-button";
 import ModalBackground from "../../components/modal-background/modal-background";
 import DeleteModal from "../../components/modals/modal-delete/modal-delete";
+import AddModal from "../../components/modals/modal-add/modal-add";
 
 import "./admin-companies.scss";
 
@@ -57,9 +58,17 @@ const AdminCompanies = ({ companyData }) => {
     <div>
       {modalOpen ? (
         <ModalBackground toggleModal={toggleModal}>
-          {addModalOpen ? <p className="modal-test">ADD</p> : null}
-          {editModalOpen ? <p className="modal-test">edit</p> : null}
-          {deleteModalOpen ? <DeleteModal className="modal-test" /> : null}
+          {addModalOpen ? (
+            <AddModal className="modal-test" toggleModal={toggleModal} />
+          ) : null}
+          {editModalOpen ? (
+            <p className="modal-test" toggleModal={toggleModal}>
+              edit
+            </p>
+          ) : null}
+          {deleteModalOpen ? (
+            <DeleteModal className="modal-test" toggleModal={toggleModal} />
+          ) : null}
         </ModalBackground>
       ) : null}
       <TheHeader title="Admin" />
