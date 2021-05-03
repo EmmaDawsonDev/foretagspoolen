@@ -12,7 +12,7 @@ const ModalAdd = () => {
 
       <section className="form-section">
         <label htmlFor="beskrivning">Beskriv företaget</label>
-        <textarea name="beskrivning" id="" cols="30" rows="10"></textarea>
+        <textarea name="beskrivning" id="" cols="30" rows="5"></textarea>
       </section>
 
       <section className="form-section">
@@ -92,21 +92,22 @@ const ModalAdd = () => {
 
       <section className="form-section">
         <p>ITHS Matchar:</p>
+        <div className="radio-btns">
+          <input type="radio" id="ja" name="ITHSMatchar" value="ja" />
+          <label htmlFor="ja">ja</label>
 
-        <input type="radio" id="ja" name="ITHSMatchar" value="ja" />
-        <label htmlFor="ja">ja</label>
-
-        <input type="radio" id="nej" name="ITHSMatchar" value="nej" checked />
-        <label htmlFor="nej">nej</label>
+          <input type="radio" id="nej" name="ITHSMatchar" value="nej" checked />
+          <label htmlFor="nej">nej</label>
+        </div>
       </section>
 
       <section className="form-section">
-        <label htmlFor="ITHSMacharBeskrivning">ITHS Matchar - detaljer</label>
+        <label htmlFor="ITHSMatcharBeskrivning">ITHS Matchar - detaljer</label>
         <textarea
           name="ITHSMatcharBeskrivning"
           id=""
           cols="30"
-          rows="10"
+          rows="5"
         ></textarea>
       </section>
 
@@ -123,12 +124,13 @@ const ModalAdd = () => {
 
       <section className="form-section">
         <p>Synlig för studerande:</p>
+        <div className="radio-btns">
+          <input type="radio" id="ja" name="synlig" value="ja" checked />
+          <label htmlFor="ja">ja</label>
 
-        <input type="radio" id="ja" name="synlig" value="ja" />
-        <label htmlFor="ja">ja</label>
-
-        <input type="radio" id="nej" name="synlig" value="nej" checked />
-        <label htmlFor="nej">nej</label>
+          <input type="radio" id="nej" name="synlig" value="nej" />
+          <label htmlFor="nej">nej</label>
+        </div>
       </section>
     </div>
   );

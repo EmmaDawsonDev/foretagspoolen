@@ -6,6 +6,8 @@
   position: fixed;
   top: 5%;
   left: 50%;
+  max-height: 90vh;
+  overflow-y: scroll;
   transform: translate(-50%);
   border-radius: 20px;
 
@@ -32,10 +34,24 @@
 
     input[type="checkbox"] {
       margin-bottom: 0.5rem;
+      width: 2%;
     }
 
     .checkbox-label {
       margin-left: 0.5rem;
+    }
+
+    .radio-btns {
+      display: flex;
+      margin-top: 0.5rem;
+
+      input[type="radio"] {
+        width: 2%;
+      }
+
+      label {
+        margin: 0 1rem 0 0.3rem;
+      }
     }
   }
 
