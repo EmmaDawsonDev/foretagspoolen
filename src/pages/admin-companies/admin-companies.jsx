@@ -29,23 +29,27 @@ const AdminCompanies = ({ companyData }) => {
 
   //Open and close modal with different content
   const toggleModal = (e, data) => {
-    setAddModalOpen(false);
-    setEditModalOpen(false);
-    setDeleteModalOpen(false);
-    setCurrentCompany({});
-
     if (e.target.innerText === "LÄGG TILL FÖRETAG") {
       setAddModalOpen(true);
+      setModalOpen(!modalOpen);
     }
     if (e.target.innerText === "REDIGERA") {
       setEditModalOpen(true);
       handleCurrentCompany(data);
+      setModalOpen(!modalOpen);
     }
     if (e.target.innerText === "RADERA") {
       setDeleteModalOpen(true);
       handleCurrentCompany(data);
+      setModalOpen(!modalOpen);
     }
-    setModalOpen(!modalOpen);
+    if (e.target.className === "modal-background") {
+      setAddModalOpen(false);
+      setEditModalOpen(false);
+      setDeleteModalOpen(false);
+      setCurrentCompany({});
+      setModalOpen(!modalOpen);
+    }
   };
 
   //To know which company you want to edit/delete:
