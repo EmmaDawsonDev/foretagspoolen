@@ -7,6 +7,8 @@ import ModalBackground from "../../components/modal-background/modal-background"
 import DeleteModal from "../../components/modals/modal-delete/modal-delete";
 import AddModal from "../../components/modals/modal-add/modal-add";
 
+import * as Firebase from "../../firebase/firebase.utils";
+
 import "./admin-companies.scss";
 
 const AdminCompanies = ({ companyData }) => {
@@ -29,13 +31,41 @@ const AdminCompanies = ({ companyData }) => {
 
   //Open and close modal with different content
   const toggleModal = (e, data) => {
+    e.stopPropagation();
+    if (
+      e.target.className === "modal-background" ||
+      e.target.innertext === "AVBRYT"
+    ) {
+      setAddModalOpen(false);
+      setEditModalOpen(false);
+      setDeleteModalOpen(false);
+      setCurrentCompany({});
+      setModalOpen(!modalOpen);
+    }
+    if (e.target.innerText === "LÄGG TILL FÖRETAGET") {
+      console.log(data);
+      Firebase.db
+        .collection("companies")
+        .add(data)
+        .then((docRef) => {
+          console.log("Document created with id:", docRef.id);
+        })
+        .catch((err) => console.log(err));
+      setAddModalOpen(false);
+      setEditModalOpen(false);
+      setDeleteModalOpen(false);
+      setCurrentCompany({});
+      setModalOpen(!modalOpen);
+    }
+
     if (e.target.innerText === "LÄGG TILL FÖRETAG") {
       setAddModalOpen(true);
       setModalOpen(!modalOpen);
     }
     if (e.target.innerText === "REDIGERA") {
-      setEditModalOpen(true);
+      //setEditModalOpen(true);
       handleCurrentCompany(data);
+      setAddModalOpen(true);
       setModalOpen(!modalOpen);
     }
     if (e.target.innerText === "RADERA") {
@@ -43,35 +73,37 @@ const AdminCompanies = ({ companyData }) => {
       handleCurrentCompany(data);
       setModalOpen(!modalOpen);
     }
-    if (e.target.className === "modal-background") {
-      setAddModalOpen(false);
-      setEditModalOpen(false);
-      setDeleteModalOpen(false);
-      setCurrentCompany({});
-      setModalOpen(!modalOpen);
-    }
   };
 
   //To know which company you want to edit/delete:
   const handleCurrentCompany = (data) => {
     setCurrentCompany({ ...data });
-    console.log(currentCompany);
   };
+
+  // const handleEvent = (e) => {
+  //   console.log(e.target);
+  // };
 
   return (
     <div>
       {modalOpen ? (
         <ModalBackground toggleModal={toggleModal}>
           {addModalOpen ? (
-            <AddModal className="modal-test" toggleModal={toggleModal} />
+            <AddModal
+              toggleModal={toggleModal}
+              currentCompany={currentCompany}
+            />
           ) : null}
           {editModalOpen ? (
-            <p className="modal-test" toggleModal={toggleModal}>
+            <p toggleModal={toggleModal} currentCompany={currentCompany}>
               edit
             </p>
           ) : null}
           {deleteModalOpen ? (
-            <DeleteModal className="modal-test" toggleModal={toggleModal} />
+            <DeleteModal
+              toggleModal={toggleModal}
+              currentCompany={currentCompany}
+            />
           ) : null}
         </ModalBackground>
       ) : null}

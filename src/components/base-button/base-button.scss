@@ -14,7 +14,8 @@ button {
   &.base {
     background-color: #dddaff;
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: $base-color;
       color: $text-lt;
     }
@@ -22,13 +23,15 @@ button {
   &.danger {
     background-color: $danger;
 
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: #a51635;
       color: $text-lt;
     }
   }
   &.grey {
-    &:hover {
+    &:hover,
+    &:focus {
       background-color: #5c5c5c;
       color: $text-lt;
     }
