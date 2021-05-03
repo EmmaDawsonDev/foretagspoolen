@@ -9,6 +9,7 @@ $text-lt: #fff;
 
   @media (min-width: 768px) {
     display: flex;
+
     justify-content: space-between;
     align-items: stretch;
     padding-bottom: 0rem;
@@ -36,6 +37,7 @@ $text-lt: #fff;
     @media (min-width: 768px) {
       flex-grow: 1;
       flex-shrink: 0;
+      max-width: 60%;
     }
   }
 

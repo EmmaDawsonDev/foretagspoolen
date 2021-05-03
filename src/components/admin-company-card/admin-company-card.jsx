@@ -5,10 +5,6 @@ import BaseButton from "../base-button/base-button";
 import "./admin-company-card.scss";
 
 const AdminCompanyCard = ({ data, toggleModal }) => {
-  const kontaktadDatum = new Date(
-    data.senastKontaktad.seconds * 1000
-  ).toLocaleDateString();
-
   return (
     <li className="admin-company-item">
       <h3>{data.namn}</h3>
@@ -42,7 +38,7 @@ const AdminCompanyCard = ({ data, toggleModal }) => {
           </p>
           <p>
             <strong>Senast kontaktad: </strong>
-            {kontaktadDatum}
+            {data.senastKontaktad}
           </p>
         </section>
       </div>

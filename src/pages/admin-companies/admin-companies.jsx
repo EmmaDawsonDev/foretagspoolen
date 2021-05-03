@@ -43,12 +43,66 @@ const AdminCompanies = ({ companyData }) => {
       setModalOpen(!modalOpen);
     }
     if (e.target.innerText === "LÄGG TILL FÖRETAGET") {
+      let alreadyExists = companyData.find(
+        (company) => company.namn.toLowerCase() === data.namn.toLowerCase()
+      );
+      console.log(alreadyExists);
+      console.log(data);
+      if (!alreadyExists) {
+        Firebase.db
+          .collection("companies")
+          .add(data)
+          .then((docRef) => {
+            console.log("Document created with id:", docRef.id);
+          })
+          .catch((err) => console.log(err));
+        setAddModalOpen(false);
+        setEditModalOpen(false);
+        setDeleteModalOpen(false);
+        setCurrentCompany({});
+        setModalOpen(!modalOpen);
+      } else {
+        Firebase.db
+          .collection("companies")
+          .doc(alreadyExists.id)
+          .set(data)
+          .then(() => {
+            console.log("Document updated successfully");
+          })
+          .catch((err) => console.log(err));
+        setAddModalOpen(false);
+        setEditModalOpen(false);
+        setDeleteModalOpen(false);
+        setCurrentCompany({});
+        setModalOpen(!modalOpen);
+      }
+    }
+
+    if (e.target.innerText === "SPARA ÄNDRINGAR") {
       console.log(data);
       Firebase.db
         .collection("companies")
-        .add(data)
-        .then((docRef) => {
-          console.log("Document created with id:", docRef.id);
+        .doc(data.id)
+        .set(data)
+        .then(() => {
+          console.log("Document updated successfully");
+        })
+        .catch((err) => console.log(err));
+      setAddModalOpen(false);
+      setEditModalOpen(false);
+      setDeleteModalOpen(false);
+      setCurrentCompany({});
+      setModalOpen(!modalOpen);
+    }
+
+    if (e.target.innerText === "JA - RADERA") {
+      console.log(data);
+      Firebase.db
+        .collection("companies")
+        .doc(data.id)
+        .delete()
+        .then(() => {
+          console.log("Document deleted successfully");
         })
         .catch((err) => console.log(err));
       setAddModalOpen(false);
@@ -63,9 +117,9 @@ const AdminCompanies = ({ companyData }) => {
       setModalOpen(!modalOpen);
     }
     if (e.target.innerText === "REDIGERA") {
-      //setEditModalOpen(true);
       handleCurrentCompany(data);
-      setAddModalOpen(true);
+      setEditModalOpen(true);
+      //setAddModalOpen(true);
       setModalOpen(!modalOpen);
     }
     if (e.target.innerText === "RADERA") {
@@ -92,12 +146,15 @@ const AdminCompanies = ({ companyData }) => {
             <AddModal
               toggleModal={toggleModal}
               currentCompany={currentCompany}
+              type="add"
             />
           ) : null}
           {editModalOpen ? (
-            <p toggleModal={toggleModal} currentCompany={currentCompany}>
-              edit
-            </p>
+            <AddModal
+              toggleModal={toggleModal}
+              currentCompany={currentCompany}
+              type="edit"
+            />
           ) : null}
           {deleteModalOpen ? (
             <DeleteModal

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./modal-add.scss";
 import BaseButton from "../../base-button/base-button";
 
-const ModalAdd = ({ currentCompany, toggleModal }) => {
+const ModalAdd = ({ currentCompany, toggleModal, type }) => {
   const [namn, setNamn] = useState(currentCompany.namn || "");
   const [beskrivning, setBeskrivning] = useState(
     currentCompany.beskrivning || ""
@@ -171,6 +171,7 @@ const ModalAdd = ({ currentCompany, toggleModal }) => {
             id="WU"
             name="WU"
             onChange={handleUtbildningar}
+            defaultChecked={utbildningar.includes("WU")}
           />
           <label htmlFor="WU" className="checkbox-label">
             WU
@@ -183,6 +184,7 @@ const ModalAdd = ({ currentCompany, toggleModal }) => {
             id="ITP"
             name="ITP"
             onChange={handleUtbildningar}
+            defaultChecked={utbildningar.includes("ITP")}
           />
           <label htmlFor="ITP" className="checkbox-label">
             ITP
@@ -195,6 +197,7 @@ const ModalAdd = ({ currentCompany, toggleModal }) => {
             id=".NET"
             name=".NET"
             onChange={handleUtbildningar}
+            defaultChecked={utbildningar.includes(".NET")}
           />
           <label htmlFor=".NET" className="checkbox-label">
             .NET
@@ -207,6 +210,7 @@ const ModalAdd = ({ currentCompany, toggleModal }) => {
             id="JAVA"
             name="JAVA"
             onChange={handleUtbildningar}
+            defaultChecked={utbildningar.includes("JAVA")}
           />
           <label htmlFor="JAVA" className="checkbox-label">
             JAVA
@@ -219,6 +223,7 @@ const ModalAdd = ({ currentCompany, toggleModal }) => {
             id="FEU"
             name="FEU"
             onChange={handleUtbildningar}
+            defaultChecked={utbildningar.includes("FEU")}
           />
           <label htmlFor="FEU" className="checkbox-label">
             FEU
@@ -231,6 +236,7 @@ const ModalAdd = ({ currentCompany, toggleModal }) => {
             id="JSU"
             name="JSU"
             onChange={handleUtbildningar}
+            defaultChecked={utbildningar.includes("JSU")}
           />
           <label htmlFor="JSU" className="checkbox-label">
             JSU
@@ -243,9 +249,23 @@ const ModalAdd = ({ currentCompany, toggleModal }) => {
             id="APP"
             name="APP"
             onChange={handleUtbildningar}
+            defaultChecked={utbildningar.includes("APP")}
           />
           <label htmlFor="APP" className="checkbox-label">
             APP
+          </label>
+        </div>
+
+        <div>
+          <input
+            type="checkbox"
+            id="TEST"
+            name="TEST"
+            onChange={handleUtbildningar}
+            defaultChecked={utbildningar.includes("TEST")}
+          />
+          <label htmlFor="TEST" className="checkbox-label">
+            TEST
           </label>
         </div>
       </section>
@@ -258,10 +278,22 @@ const ModalAdd = ({ currentCompany, toggleModal }) => {
       <section className="form-section">
         <p>ITHS Matchar:</p>
         <div className="radio-btns" onChange={handleITHSMatchar}>
-          <input type="radio" id="ja" name="ITHSMatchar" value="ja" />
+          <input
+            type="radio"
+            id="ja"
+            name="ITHSMatchar"
+            value="ja"
+            defaultChecked={ITHSMatchar}
+          />
           <label htmlFor="ja">JA</label>
 
-          <input type="radio" id="nej" name="ITHSMatchar" value="nej" />
+          <input
+            type="radio"
+            id="nej"
+            name="ITHSMatchar"
+            value="nej"
+            defaultChecked={!ITHSMatchar}
+          />
           <label htmlFor="nej">NEJ</label>
         </div>
       </section>
@@ -293,21 +325,51 @@ const ModalAdd = ({ currentCompany, toggleModal }) => {
       <section className="form-section">
         <p>Synlig för studerande:</p>
         <div className="radio-btns" onChange={handleSynlig}>
-          <input type="radio" id="ja" name="synlig" value="ja" />
+          <input
+            type="radio"
+            id="ja"
+            name="synlig"
+            value="ja"
+            defaultChecked={synlig}
+          />
           <label htmlFor="ja">JA</label>
 
-          <input type="radio" id="nej" name="synlig" value="nej" />
+          <input
+            type="radio"
+            id="nej"
+            name="synlig"
+            value="nej"
+            defaultChecked={!synlig}
+          />
           <label htmlFor="nej">NEJ</label>
         </div>
       </section>
-      <section className="buttons">
-        <BaseButton color="danger" toggleModal={toggleModal} data={company}>
-          LÄGG TILL FÖRETAGET
-        </BaseButton>
-        <BaseButton color="grey" toggleModal={toggleModal}>
-          AVBRYT
-        </BaseButton>
-      </section>
+
+      {type === "add" ? (
+        <section className="buttons">
+          <BaseButton color="danger" toggleModal={toggleModal} data={company}>
+            LÄGG TILL FÖRETAGET
+          </BaseButton>
+          <BaseButton color="grey" toggleModal={toggleModal}>
+            AVBRYT
+          </BaseButton>
+        </section>
+      ) : null}
+
+      {type === "edit" ? (
+        <section className="buttons">
+          <BaseButton
+            color="danger"
+            toggleModal={toggleModal}
+            data={{ ...company, id: currentCompany.id }}
+          >
+            SPARA ÄNDRINGAR
+          </BaseButton>
+          <BaseButton color="grey" toggleModal={toggleModal}>
+            AVBRYT
+          </BaseButton>
+        </section>
+      ) : null}
     </div>
   );
 };

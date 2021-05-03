@@ -12,11 +12,15 @@ const DeleteModal = ({ currentCompany, toggleModal }) => {
         företagspoolen?
       </h3>
       <section className="buttons">
-        <BaseButton color="danger" toggleModal={toggleModal}>
-          JA
+        <BaseButton
+          color="danger"
+          toggleModal={toggleModal}
+          data={currentCompany}
+        >
+          JA - RADERA
         </BaseButton>
-        <BaseButton color="base" toggleModal={toggleModal}>
-          NEJ
+        <BaseButton color="grey" toggleModal={toggleModal}>
+          AVBRYT
         </BaseButton>
       </section>
     </div>
