@@ -81,7 +81,11 @@ function App() {
             !isLoggedIn ? (
               <Redirect to="/login" />
             ) : (
-              <AdminCompanies {...props} companyData={companyData} />
+              <AdminCompanies
+                {...props}
+                companyData={companyData}
+                isLoggedIn={isLoggedIn}
+              />
             )
           }
         />

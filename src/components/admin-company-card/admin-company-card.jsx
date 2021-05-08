@@ -40,6 +40,10 @@ const AdminCompanyCard = ({ data, toggleModal }) => {
             <strong>Senast kontaktad: </strong>
             {data.senastKontaktad}
           </p>
+          <p>
+            <strong>Synlig för studerande: </strong>
+            {data.synlig ? "Ja" : "Nej"}
+          </p>
         </section>
       </div>
       <div className="buttons">

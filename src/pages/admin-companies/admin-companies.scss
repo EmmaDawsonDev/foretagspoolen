@@ -1,13 +1,40 @@
 .admin-wrapper {
+  position: relative;
   width: 100%;
   max-width: 850px;
   margin: 0 auto;
+
+  .log-out-btn {
+    position: absolute;
+    right: 0.5rem;
+    top: -6.5rem;
+    background-color: #fff;
+    min-width: 3rem;
+  }
 
   .search-wrapper {
     padding: 0.5rem;
 
     .admin-search {
       margin: 1.5rem 0;
+      text-align: left;
+
+      & > * + * {
+        margin-top: 0.5rem;
+        @media (min-width: 540px) {
+          margin-top: 0rem;
+          margin-left: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+          margin-left: 1.3rem;
+        }
+      }
+
+      @media (min-width: 540px) {
+        display: flex;
+        justify-content: space-between;
+      }
     }
 
     .add-company {

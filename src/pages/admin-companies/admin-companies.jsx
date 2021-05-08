@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import TheHeader from "../../components/the-header/the-header";
 import AdminCompanyList from "../../components/admin-company-list/admin-company-list";
 import SearchBar from "../../components/search-bar/search-bar";
+import SortDropdown from "../../components/sort-dropdown/sort-dropdown";
+import AdminFilterDropdown from "../../components/admin-filter-dropdown/admin-filter-dropdown";
 import BaseButton from "../../components/base-button/base-button";
 import ModalBackground from "../../components/modal-background/modal-background";
 import DeleteModal from "../../components/modals/modal-delete/modal-delete";
@@ -11,9 +13,11 @@ import * as Firebase from "../../firebase/firebase.utils";
 
 import "./admin-companies.scss";
 
-const AdminCompanies = ({ companyData }) => {
+const AdminCompanies = ({ companyData, isLoggedIn }) => {
   const [currentCompany, setCurrentCompany] = useState({});
   const [adminSearchTerm, setAdminSearchTerm] = useState("");
+  const [adminSortBy, setAdminSortBy] = useState("A-Ö");
+  const [filterByCompany, setFilterByCompany] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
@@ -24,17 +28,75 @@ const AdminCompanies = ({ companyData }) => {
     console.log(adminSearchTerm);
   };
 
+  const filterCompanies = (e) => {
+    console.log(e.target.value);
+    setFilterByCompany(e.target.value);
+  };
+
+  const sortCourses = (e) => {
+    console.log(e.target.value);
+    setAdminSortBy(e.target.value);
+  };
+
   //Filter by search term
   const filteredCompaniesBySearch = companyData.filter((company) =>
     company.namn.toLowerCase().includes(adminSearchTerm.toLowerCase())
   );
+
+  // Filter by filter term
+  let filteredCompaniesByFilter = filteredCompaniesBySearch;
+  if (filterByCompany === "IngenUtbildning") {
+    filteredCompaniesByFilter = filteredCompaniesBySearch.filter(
+      (company) => company.utbildningar.length === 0
+    );
+  }
+  if (filterByCompany === "ITHSMatchar") {
+    filteredCompaniesByFilter = filteredCompaniesBySearch.filter(
+      (company) => company.ITHSMatchar === true
+    );
+  }
+  if (filterByCompany === "Osynlig") {
+    filteredCompaniesByFilter = filteredCompaniesBySearch.filter(
+      (company) => company.synlig === false
+    );
+  }
+  if (
+    ["WU", "ITP", "FEU", ".NET", "JAVA", "JSU", "APP", "TEST"].includes(
+      filterByCompany
+    )
+  ) {
+    console.log("here");
+    filteredCompaniesByFilter = filteredCompaniesBySearch.filter((company) =>
+      company.utbildningar.includes(filterByCompany)
+    );
+  }
+
+  //Sort filtered company list
+  let filteredAndSorted = "";
+
+  if (adminSortBy === "A-Ö") {
+    filteredAndSorted = filteredCompaniesByFilter.sort((a, b) =>
+      a.namn.localeCompare(b.namn)
+    );
+  }
+  if (adminSortBy === "Ö-A") {
+    filteredAndSorted = filteredCompaniesByFilter.sort((a, b) =>
+      b.namn.localeCompare(a.namn)
+    );
+  }
+  if (adminSortBy === "timestamp") {
+    filteredAndSorted = filteredCompaniesByFilter.sort(
+      (a, b) => b.timestamp - a.timestamp
+    );
+  }
 
   //Open and close modal with different content
   const toggleModal = (e, data) => {
     e.stopPropagation();
     if (
       e.target.className === "modal-background" ||
-      e.target.innertext === "AVBRYT"
+      e.target.className === "grey" ||
+      e.target.className === "close-modal-button"
     ) {
       setAddModalOpen(false);
       setEditModalOpen(false);
@@ -166,9 +228,12 @@ const AdminCompanies = ({ companyData }) => {
       ) : null}
       <TheHeader title="Admin" />
       <main className="admin-wrapper">
+        <button className="log-out-btn">Log out</button>
         <section className="search-wrapper">
           <section className="admin-search">
             <SearchBar searchTerm={adminSearchTerm} setSearch={setSearch} />
+            <AdminFilterDropdown filterCompanies={filterCompanies} />
+            <SortDropdown sortCourses={sortCourses} />
           </section>
 
           <section className="add-company">
@@ -179,7 +244,7 @@ const AdminCompanies = ({ companyData }) => {
         </section>
         {companyData ? (
           <AdminCompanyList
-            companyData={filteredCompaniesBySearch}
+            companyData={filteredAndSorted}
             toggleModal={toggleModal}
             handleCurrentCompany={handleCurrentCompany}
           />

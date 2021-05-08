@@ -107,7 +107,11 @@ const ModalAdd = ({ currentCompany, toggleModal, type }) => {
 
   return (
     <div className="add-modal">
-      <p className="close-modal-button" aria-label="Close">
+      <p
+        className="close-modal-button"
+        aria-label="Close"
+        onClick={(e) => toggleModal(e)}
+      >
         &#10006;
       </p>
       <section className="form-section">

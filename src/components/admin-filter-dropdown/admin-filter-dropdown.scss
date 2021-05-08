@@ -1,0 +1,16 @@
+.admin-filter-dropdown {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  label {
+    padding-right: 0.3rem;
+  }
+
+  select {
+    background-color: #efeeff;
+    min-width: 10rem;
+    width: 75%;
+    height: 1.8rem;
+    border: 1px solid #dddaff;
+  }
+}
