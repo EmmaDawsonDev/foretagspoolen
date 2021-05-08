@@ -44,8 +44,10 @@ const Homepage = (props) => {
   const filteredCompanies =
     filterByCourse === ""
       ? filteredCompaniesBySearch
-      : filteredCompaniesBySearch.filter((company) =>
-          company.utbildningar.includes(filterByCourse)
+      : filteredCompaniesBySearch.filter(
+          (company) =>
+            company.utbildningar.includes(filterByCourse) ||
+            company.utbildningar.length === 0
         );
 
   //Sort filtered company list

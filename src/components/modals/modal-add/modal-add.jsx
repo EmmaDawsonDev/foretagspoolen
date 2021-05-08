@@ -107,6 +107,9 @@ const ModalAdd = ({ currentCompany, toggleModal, type }) => {
 
   return (
     <div className="add-modal">
+      <p className="close-modal-button" aria-label="Close">
+        &#10006;
+      </p>
       <section className="form-section">
         <label htmlFor="företagsnamn">Företagets namn:</label>
         <input
@@ -319,6 +322,7 @@ const ModalAdd = ({ currentCompany, toggleModal, type }) => {
           name="senastKontaktad"
           value={senastKontaktad}
           onChange={handleSenastKontaktad}
+          required
         />
       </section>
 

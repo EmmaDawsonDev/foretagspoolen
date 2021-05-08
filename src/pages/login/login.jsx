@@ -2,7 +2,6 @@ import React, { useState } from "react";
 //import * as Firebase from "./firebase/firebase.utils";
 
 import TheHeader from "../../components/the-header/the-header";
-import BaseButton from "../../components/base-button/base-button";
 
 import "./login.scss";
 
@@ -50,9 +49,9 @@ const LoginPage = ({ handleSubmit }) => {
             />
           </section>
 
-          <BaseButton color="base" type="submit">
+          <button className="base" type="submit">
             Sign In
-          </BaseButton>
+          </button>
         </form>
       </main>
     </React.Fragment>

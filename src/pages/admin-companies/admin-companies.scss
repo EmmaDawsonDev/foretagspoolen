@@ -3,12 +3,16 @@
   max-width: 850px;
   margin: 0 auto;
 
-  .admin-search {
-    margin: 1.5rem 0;
-  }
+  .search-wrapper {
+    padding: 0.5rem;
 
-  .add-company {
-    text-align: right;
-    margin: 1.5rem 0;
+    .admin-search {
+      margin: 1.5rem 0;
+    }
+
+    .add-company {
+      text-align: right;
+      margin: 1.5rem 0;
+    }
   }
 }

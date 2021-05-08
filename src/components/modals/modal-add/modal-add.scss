@@ -1,7 +1,19 @@
+.close-modal-button {
+  font-size: 1.5rem;
+  position: absolute;
+  right: 1.5em;
+  top: 0.5em;
+  cursor: pointer;
+}
+
+.close-modal-button:hover {
+  transform: scale(1.1);
+}
+
 .add-modal {
   text-align: left;
   background-color: #fff;
-  width: 18rem;
+  width: 23rem;
   padding: 2rem;
   position: fixed;
   top: 5%;
@@ -12,6 +24,14 @@
   border-radius: 20px;
 
   @media (min-width: 540px) {
+    width: 31rem;
+  }
+
+  @media (min-width: 768px) {
+    width: 45rem;
+  }
+
+  @media (min-width: 1000px) {
     width: 60rem;
   }
 

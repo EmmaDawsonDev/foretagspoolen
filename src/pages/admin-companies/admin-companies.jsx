@@ -166,14 +166,16 @@ const AdminCompanies = ({ companyData }) => {
       ) : null}
       <TheHeader title="Admin" />
       <main className="admin-wrapper">
-        <section className="admin-search">
-          <SearchBar searchTerm={adminSearchTerm} setSearch={setSearch} />
-        </section>
+        <section className="search-wrapper">
+          <section className="admin-search">
+            <SearchBar searchTerm={adminSearchTerm} setSearch={setSearch} />
+          </section>
 
-        <section className="add-company">
-          <BaseButton color="danger" toggleModal={toggleModal}>
-            Lägg till företag
-          </BaseButton>
+          <section className="add-company">
+            <BaseButton color="danger" toggleModal={toggleModal}>
+              Lägg till företag
+            </BaseButton>
+          </section>
         </section>
         {companyData ? (
           <AdminCompanyList
