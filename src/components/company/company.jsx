@@ -12,7 +12,11 @@ const Company = ({ data }) => {
           <p key={index}>{utbildning}</p>
         ))}
       </section>
-      <Link className="more-info-link" to={encodeURI(data.namn)}>
+      <Link
+        className="more-info-link"
+        aria-label={`Öppna sidan med mer info om ${data.namn}`}
+        to={encodeURI(data.namn)}
+      >
         Mer info
       </Link>
     </li>
