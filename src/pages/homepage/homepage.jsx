@@ -13,19 +13,15 @@ const Homepage = (props) => {
   const [filterByCourse, setFilterByCourse] = useState("");
   const [sortBy, setSortBy] = useState("A-Ö");
 
-  console.log(("HP", props));
-
   const setSearch = (e) => {
     setSearchTerm(e.target.value);
   };
 
   const filterCourses = (e) => {
-    console.log(e.target.value);
     setFilterByCourse(e.target.value);
   };
 
   const sortCourses = (e) => {
-    console.log(e.target.value);
     setSortBy(e.target.value);
   };
 
