@@ -62,6 +62,7 @@ $text-lt: #fff;
     background-color: $base-color-lt;
     padding: 0.5rem;
     border-radius: 3px;
+    display: inline-block;
 
     &:hover {
       background-color: $base-color;
