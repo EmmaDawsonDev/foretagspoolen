@@ -15,20 +15,17 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [user, setUser] = useState(null);
   const [loginError, setLoginError] = useState("");
-  console.log(user, isLoggedIn);
 
   useEffect(() => {
-    Firebase.db
-      .collection("companies")
-      .get()
-      .then((querySnapshot) => {
-        const data = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        }));
-        setCompanyData([...data]);
-        console.log(data);
-      });
+    const currentTime = Date.now();
+    const companyDataExpiry = sessionStorage.getItem("companyDataExpiry");
+    const companyDataCache = sessionStorage.getItem("companyData");
+
+    if (currentTime < companyDataExpiry && companyDataCache) {
+      setCompanyData(JSON.parse(companyDataCache));
+    } else {
+      readDatabase();
+    }
 
     Firebase.auth.onAuthStateChanged((user) => {
       setUser(user);
@@ -37,8 +34,6 @@ function App() {
       } else {
         setIsLoggedIn(true);
       }
-
-      console.log(user);
     });
   }, []);
 
@@ -51,8 +46,6 @@ function App() {
         const user = userCredential.user;
         setUser(user);
         setIsLoggedIn(true);
-        console.log("I worked!");
-        // ...
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -76,25 +69,44 @@ function App() {
       });
   };
 
-  const addCompanyData = (newCompany) => {
-    const updatedCompanyData = [...companyData, newCompany];
-    setCompanyData(updatedCompanyData);
+  const readDatabase = () => {
+    return Firebase.db
+      .collection("companies")
+      .get()
+      .then((querySnapshot) => {
+        const data = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setCompanyData([...data]);
+        const expiryTime = Date.now() + 86400000;
+        sessionStorage.setItem("companyData", JSON.stringify([...data]));
+        sessionStorage.setItem("companyDataExpiry", expiryTime);
+      });
   };
 
-  const updateCompanyData = (updatedCompany) => {
-    const removeUpdated = companyData.filter(
-      (company) => company.namn !== updatedCompany.namn
-    );
-    const updatedCompanyData = [...removeUpdated, updatedCompany];
-    setCompanyData(updatedCompanyData);
-  };
+  // const addCompanyData = (newCompany) => {
+  //   const updatedCompanyData = [...companyData, newCompany];
+  //   sessionStorage.setItem("companyData", JSON.stringify(updatedCompanyData));
+  //   setCompanyData(updatedCompanyData);
+  // };
 
-  const deleteCompanyData = (deletedCompanyId) => {
-    const updatedCompanyData = companyData.filter(
-      (company) => company.id !== deletedCompanyId
-    );
-    setCompanyData(updatedCompanyData);
-  };
+  // const updateCompanyData = (updatedCompany) => {
+  //   const removeUpdated = companyData.filter(
+  //     (company) => company.namn !== updatedCompany.namn
+  //   );
+  //   const updatedCompanyData = [...removeUpdated, updatedCompany];
+  //   sessionStorage.setItem("companyData", JSON.stringify(updatedCompanyData));
+  //   setCompanyData(updatedCompanyData);
+  // };
+
+  // const deleteCompanyData = (deletedCompanyId) => {
+  //   const updatedCompanyData = companyData.filter(
+  //     (company) => company.id !== deletedCompanyId
+  //   );
+  //   sessionStorage.setItem("companyData", JSON.stringify(updatedCompanyData));
+  //   setCompanyData(updatedCompanyData);
+  // };
 
   return (
     <div className="App">
@@ -108,7 +120,7 @@ function App() {
           exact
           path="/login"
           render={(props) =>
-            isLoggedIn ? (
+            user && isLoggedIn ? (
               <Redirect to="/admin" />
             ) : (
               <Login
@@ -123,16 +135,17 @@ function App() {
           exact
           path="/admin"
           render={(props) =>
-            !isLoggedIn ? (
+            !isLoggedIn || !user ? (
               <Redirect to="/login" />
             ) : (
               <AdminCompanies
                 {...props}
                 companyData={companyData}
                 isLoggedIn={isLoggedIn}
-                addCompanyData={addCompanyData}
-                updateCompanyData={updateCompanyData}
-                deleteCompanyData={deleteCompanyData}
+                // addCompanyData={addCompanyData}
+                // updateCompanyData={updateCompanyData}
+                // deleteCompanyData={deleteCompanyData}
+                readDatabase={readDatabase}
                 handleSignout={handleSignout}
               />
             )
