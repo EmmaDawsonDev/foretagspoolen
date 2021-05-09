@@ -5,7 +5,6 @@ import Company from "../company/company";
 import "./company-list.scss";
 
 const CompanyList = ({ companyData }) => {
-  //console.log("CL", companyData);
   return (
     <ul className="company-list">
       {companyData.map((company) => (
