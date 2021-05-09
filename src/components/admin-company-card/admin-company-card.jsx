@@ -22,7 +22,10 @@ const AdminCompanyCard = ({ data, toggleModal }) => {
           </p>
           <p>
             <strong>Hemsida: </strong>
-            <a href={data.hemsida}> {data.hemsida}</a>
+            <a href={data.hemsida} rel="noreferrer" target="_blank">
+              {" "}
+              {data.hemsida}
+            </a>
           </p>
           <p>
             <strong>ITHS Matchar: </strong>
@@ -34,7 +37,10 @@ const AdminCompanyCard = ({ data, toggleModal }) => {
           </p>
           <p>
             <strong>Kontakt webbsida: </strong>
-            <a href={data.kontaktWebbsida}> {data.kontaktWebbsida}</a>
+            <a href={data.kontaktWebbsida} rel="noreferrer" target="_blank">
+              {" "}
+              {data.kontaktWebbsida}
+            </a>
           </p>
           <p>
             <strong>Senast kontaktad: </strong>
