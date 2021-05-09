@@ -15,9 +15,10 @@ import "./admin-companies.scss";
 
 const AdminCompanies = ({
   companyData,
-  addCompanyData,
-  updateCompanyData,
-  deleteCompanyData,
+  // addCompanyData,
+  // updateCompanyData,
+  // deleteCompanyData,
+  readDatabase,
   handleSignout,
 }) => {
   const [currentCompany, setCurrentCompany] = useState({});
@@ -35,12 +36,10 @@ const AdminCompanies = ({
   };
 
   const filterCompanies = (e) => {
-    console.log(e.target.value);
     setFilterByCompany(e.target.value);
   };
 
   const sortCourses = (e) => {
-    console.log(e.target.value);
     setAdminSortBy(e.target.value);
   };
 
@@ -121,7 +120,8 @@ const AdminCompanies = ({
           .then((docRef) => {
             data.id = docRef.id;
 
-            addCompanyData(data);
+            // addCompanyData(data);
+            readDatabase();
             console.log("Document created with id:", docRef.id);
             setAddModalOpen(false);
             setEditModalOpen(false);
@@ -141,7 +141,8 @@ const AdminCompanies = ({
           .then(() => {
             data.id = alreadyExists.id;
 
-            updateCompanyData(data);
+            // updateCompanyData(data);
+            readDatabase();
             console.log("Document updated successfully");
             setAddModalOpen(false);
             setEditModalOpen(false);
@@ -157,14 +158,12 @@ const AdminCompanies = ({
     }
 
     if (e.target.innerText === "SPARA ÄNDRINGAR") {
-      console.log(data);
       Firebase.db
         .collection("companies")
         .doc(data.id)
         .set(data)
         .then(() => {
-          console.log(data);
-          updateCompanyData(data);
+          readDatabase();
           console.log("Document updated successfully");
           setAddModalOpen(false);
           setEditModalOpen(false);
@@ -179,13 +178,12 @@ const AdminCompanies = ({
     }
 
     if (e.target.innerText === "JA - RADERA") {
-      console.log(data);
       Firebase.db
         .collection("companies")
         .doc(data.id)
         .delete()
         .then(() => {
-          deleteCompanyData(data.id);
+          readDatabase();
           console.log("Document deleted successfully");
           setAddModalOpen(false);
           setEditModalOpen(false);
@@ -220,10 +218,6 @@ const AdminCompanies = ({
   const handleCurrentCompany = (data) => {
     setCurrentCompany({ ...data });
   };
-
-  // const handleEvent = (e) => {
-  //   console.log(e.target);
-  // };
 
   return (
     <div>
