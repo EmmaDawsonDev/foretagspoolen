@@ -17,7 +17,7 @@ const AdminCompanyCard = ({ data, toggleModal }) => {
         </section>
         <section className="company-info">
           <p>
-            <strong>Beskrivning:</strong>
+            <strong>Beskrivning: </strong>
             {data.beskrivning}
           </p>
           <p>

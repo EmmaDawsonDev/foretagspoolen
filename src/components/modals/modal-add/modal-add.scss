@@ -23,6 +23,13 @@
   transform: translate(-50%);
   border-radius: 20px;
 
+  .error {
+    color: #d81d46;
+    margin-top: 1rem;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+
   @media (min-width: 540px) {
     width: 31rem;
   }

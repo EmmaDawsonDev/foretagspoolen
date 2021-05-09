@@ -13,7 +13,13 @@ import * as Firebase from "../../firebase/firebase.utils";
 
 import "./admin-companies.scss";
 
-const AdminCompanies = ({ companyData, isLoggedIn }) => {
+const AdminCompanies = ({
+  companyData,
+  addCompanyData,
+  updateCompanyData,
+  deleteCompanyData,
+  handleSignout,
+}) => {
   const [currentCompany, setCurrentCompany] = useState({});
   const [adminSearchTerm, setAdminSearchTerm] = useState("");
   const [adminSortBy, setAdminSortBy] = useState("A-Ö");
@@ -22,10 +28,10 @@ const AdminCompanies = ({ companyData, isLoggedIn }) => {
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [updateDBError, setUpdateDBError] = useState("");
 
   const setSearch = (e) => {
     setAdminSearchTerm(e.target.value);
-    console.log(adminSearchTerm);
   };
 
   const filterCompanies = (e) => {
@@ -65,7 +71,6 @@ const AdminCompanies = ({ companyData, isLoggedIn }) => {
       filterByCompany
     )
   ) {
-    console.log("here");
     filteredCompaniesByFilter = filteredCompaniesBySearch.filter((company) =>
       company.utbildningar.includes(filterByCompany)
     );
@@ -108,35 +113,46 @@ const AdminCompanies = ({ companyData, isLoggedIn }) => {
       let alreadyExists = companyData.find(
         (company) => company.namn.toLowerCase() === data.namn.toLowerCase()
       );
-      console.log(alreadyExists);
-      console.log(data);
+
       if (!alreadyExists) {
         Firebase.db
           .collection("companies")
           .add(data)
           .then((docRef) => {
+            data.id = docRef.id;
+
+            addCompanyData(data);
             console.log("Document created with id:", docRef.id);
+            setAddModalOpen(false);
+            setEditModalOpen(false);
+            setDeleteModalOpen(false);
+            setCurrentCompany({});
+            setModalOpen(!modalOpen);
           })
-          .catch((err) => console.log(err));
-        setAddModalOpen(false);
-        setEditModalOpen(false);
-        setDeleteModalOpen(false);
-        setCurrentCompany({});
-        setModalOpen(!modalOpen);
+          .catch((err) => {
+            setUpdateDBError("Någonting gick fel ", err);
+            console.log(err);
+          });
       } else {
         Firebase.db
           .collection("companies")
           .doc(alreadyExists.id)
           .set(data)
           .then(() => {
+            data.id = alreadyExists.id;
+
+            updateCompanyData(data);
             console.log("Document updated successfully");
+            setAddModalOpen(false);
+            setEditModalOpen(false);
+            setDeleteModalOpen(false);
+            setCurrentCompany({});
+            setModalOpen(!modalOpen);
           })
-          .catch((err) => console.log(err));
-        setAddModalOpen(false);
-        setEditModalOpen(false);
-        setDeleteModalOpen(false);
-        setCurrentCompany({});
-        setModalOpen(!modalOpen);
+          .catch((err) => {
+            setUpdateDBError("Någonting gick fel ", err);
+            console.log(err);
+          });
       }
     }
 
@@ -147,14 +163,19 @@ const AdminCompanies = ({ companyData, isLoggedIn }) => {
         .doc(data.id)
         .set(data)
         .then(() => {
+          console.log(data);
+          updateCompanyData(data);
           console.log("Document updated successfully");
+          setAddModalOpen(false);
+          setEditModalOpen(false);
+          setDeleteModalOpen(false);
+          setCurrentCompany({});
+          setModalOpen(!modalOpen);
         })
-        .catch((err) => console.log(err));
-      setAddModalOpen(false);
-      setEditModalOpen(false);
-      setDeleteModalOpen(false);
-      setCurrentCompany({});
-      setModalOpen(!modalOpen);
+        .catch((err) => {
+          setUpdateDBError("Någonting gick fel ", err);
+          console.log(err);
+        });
     }
 
     if (e.target.innerText === "JA - RADERA") {
@@ -164,14 +185,18 @@ const AdminCompanies = ({ companyData, isLoggedIn }) => {
         .doc(data.id)
         .delete()
         .then(() => {
+          deleteCompanyData(data.id);
           console.log("Document deleted successfully");
+          setAddModalOpen(false);
+          setEditModalOpen(false);
+          setDeleteModalOpen(false);
+          setCurrentCompany({});
+          setModalOpen(!modalOpen);
         })
-        .catch((err) => console.log(err));
-      setAddModalOpen(false);
-      setEditModalOpen(false);
-      setDeleteModalOpen(false);
-      setCurrentCompany({});
-      setModalOpen(!modalOpen);
+        .catch((err) => {
+          setUpdateDBError("Någonting gick fel ", err);
+          console.log(err);
+        });
     }
 
     if (e.target.innerText === "LÄGG TILL FÖRETAG") {
@@ -209,6 +234,7 @@ const AdminCompanies = ({ companyData, isLoggedIn }) => {
               toggleModal={toggleModal}
               currentCompany={currentCompany}
               type="add"
+              updateDBError={updateDBError}
             />
           ) : null}
           {editModalOpen ? (
@@ -216,19 +242,23 @@ const AdminCompanies = ({ companyData, isLoggedIn }) => {
               toggleModal={toggleModal}
               currentCompany={currentCompany}
               type="edit"
+              updateDBError={updateDBError}
             />
           ) : null}
           {deleteModalOpen ? (
             <DeleteModal
               toggleModal={toggleModal}
               currentCompany={currentCompany}
+              updateDBError={updateDBError}
             />
           ) : null}
         </ModalBackground>
       ) : null}
       <TheHeader title="Admin" />
       <main className="admin-wrapper">
-        <button className="log-out-btn">Log out</button>
+        <button className="log-out-btn" onClick={(e) => handleSignout(e)}>
+          Log out
+        </button>
         <section className="search-wrapper">
           <section className="admin-search">
             <SearchBar searchTerm={adminSearchTerm} setSearch={setSearch} />

@@ -13,7 +13,8 @@ import "./App.css";
 function App() {
   const [companyData, setCompanyData] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
+  const [loginError, setLoginError] = useState("");
   console.log(user, isLoggedIn);
 
   useEffect(() => {
@@ -31,7 +32,12 @@ function App() {
 
     Firebase.auth.onAuthStateChanged((user) => {
       setUser(user);
-      setIsLoggedIn(true);
+      if (!user) {
+        setIsLoggedIn(false);
+      } else {
+        setIsLoggedIn(true);
+      }
+
       console.log(user);
     });
   }, []);
@@ -49,10 +55,45 @@ function App() {
         // ...
       })
       .catch((error) => {
-        var errorCode = error.code;
-        var errorMessage = error.message;
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setLoginError(errorMessage);
         console.log(errorCode, errorMessage);
       });
+  };
+
+  const handleSignout = (e) => {
+    //e.preventDefault();
+    Firebase.auth
+      .signOut()
+      .then(() => {
+        setUser(null);
+        setIsLoggedIn(false);
+        console.log("Successfully logged out");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const addCompanyData = (newCompany) => {
+    const updatedCompanyData = [...companyData, newCompany];
+    setCompanyData(updatedCompanyData);
+  };
+
+  const updateCompanyData = (updatedCompany) => {
+    const removeUpdated = companyData.filter(
+      (company) => company.namn !== updatedCompany.namn
+    );
+    const updatedCompanyData = [...removeUpdated, updatedCompany];
+    setCompanyData(updatedCompanyData);
+  };
+
+  const deleteCompanyData = (deletedCompanyId) => {
+    const updatedCompanyData = companyData.filter(
+      (company) => company.id !== deletedCompanyId
+    );
+    setCompanyData(updatedCompanyData);
   };
 
   return (
@@ -70,7 +111,11 @@ function App() {
             isLoggedIn ? (
               <Redirect to="/admin" />
             ) : (
-              <Login {...props} handleSubmit={handleSubmit} />
+              <Login
+                {...props}
+                handleSubmit={handleSubmit}
+                loginError={loginError}
+              />
             )
           }
         />
@@ -85,6 +130,10 @@ function App() {
                 {...props}
                 companyData={companyData}
                 isLoggedIn={isLoggedIn}
+                addCompanyData={addCompanyData}
+                updateCompanyData={updateCompanyData}
+                deleteCompanyData={deleteCompanyData}
+                handleSignout={handleSignout}
               />
             )
           }

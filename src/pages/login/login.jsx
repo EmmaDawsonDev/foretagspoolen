@@ -5,7 +5,7 @@ import TheHeader from "../../components/the-header/the-header";
 
 import "./login.scss";
 
-const LoginPage = ({ handleSubmit }) => {
+const LoginPage = ({ handleSubmit, loginError }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -50,8 +50,11 @@ const LoginPage = ({ handleSubmit }) => {
           </section>
 
           <button className="base" type="submit">
-            Sign In
+            Logga In
           </button>
+          {loginError ? (
+            <p className="error">Email och lösenord matchar inte</p>
+          ) : null}
         </form>
       </main>
     </React.Fragment>

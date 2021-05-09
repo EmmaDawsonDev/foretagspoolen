@@ -4,7 +4,7 @@ import BaseButton from "../../base-button/base-button";
 
 import "./modal-delete.scss";
 
-const DeleteModal = ({ currentCompany, toggleModal }) => {
+const DeleteModal = ({ currentCompany, toggleModal, updateDBError }) => {
   return (
     <div className="delete-modal">
       <h3>
@@ -23,6 +23,7 @@ const DeleteModal = ({ currentCompany, toggleModal }) => {
           AVBRYT
         </BaseButton>
       </section>
+      {updateDBError ? <p className="error">{updateDBError}</p> : null}
     </div>
   );
 };

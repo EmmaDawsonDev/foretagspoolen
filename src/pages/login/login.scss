@@ -2,6 +2,13 @@
   max-width: 18rem;
   margin: 3rem auto;
 
+  .error {
+    color: #d81d46;
+    margin-top: 1rem;
+    font-weight: bold;
+    font-size: 0.8rem;
+  }
+
   section {
     display: flex;
     flex-direction: column;

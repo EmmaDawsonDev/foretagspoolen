@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import "./modal-add.scss";
 import BaseButton from "../../base-button/base-button";
 
-const ModalAdd = ({ currentCompany, toggleModal, type }) => {
+const ModalAdd = ({ currentCompany, toggleModal, type, updateDBError }) => {
   const [namn, setNamn] = useState(currentCompany.namn || "");
   const [beskrivning, setBeskrivning] = useState(
     currentCompany.beskrivning || ""
@@ -26,7 +26,7 @@ const ModalAdd = ({ currentCompany, toggleModal, type }) => {
     currentCompany.ITHSMatcharBeskrivning || ""
   );
   const [senastKontaktad, setSenastKontaktad] = useState(
-    currentCompany.senastKontaktad
+    currentCompany.senastKontaktad || new Date().toLocaleDateString()
   );
   const [synlig, setSynlig] = useState(currentCompany.synlig || true);
 
@@ -378,6 +378,8 @@ const ModalAdd = ({ currentCompany, toggleModal, type }) => {
           </BaseButton>
         </section>
       ) : null}
+
+      {updateDBError ? <p className="error">{updateDBError}</p> : null}
     </div>
   );
 };
