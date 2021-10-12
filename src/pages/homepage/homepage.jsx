@@ -67,21 +67,17 @@ const Homepage = (props) => {
 
   return (
     <React.Fragment>
-      <TheHeader title="Foretagspoolen" />
+      <TheHeader title="Företagspoolen" />
       <main className="homepage-wrapper">
         <section className="search">
           <SearchBar searchTerm={searchTerm} setSearch={setSearch} />
           <FilterDropdown filterCourses={filterCourses} />
           <SortDropdown sortCourses={sortCourses} />
         </section>
-        {filteredCompanies.length > 0 ? (
-          <CompanyList companyData={filteredAndSorted} />
-        ) : (
-          <h6>Inga resultat</h6>
-        )}
+        {filteredCompanies.length > 0 ? <CompanyList companyData={filteredAndSorted} /> : <h6>Inga resultat</h6>}
       </main>
     </React.Fragment>
-  );
+  )
 };
 
 export default Homepage;

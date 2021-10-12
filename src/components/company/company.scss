@@ -1,34 +1,42 @@
-$base-color: #262254;
-$base-color-lt: #efeeff;
+$base-color: #662246;
+$base-color-lt: #F7F4F5;
 $text-lt: #fff;
 
 .company-item {
-  margin: 1rem 0.5rem;
-  padding-bottom: 0.5rem;
-  border: 1px solid #eee;
-
-  @media (min-width: 540px) {
+  margin: 0.5rem;
+  
+  summary {
+    background-color: $base-color-lt;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 0rem;
-    padding-right: 0.3rem;
-    margin: 0.5rem;
-  }
+    flex-direction: column;
 
-  h3 {
-    background-color: $base-color;
-    color: $text-lt;
-    padding: 0.3rem 0;
-    font-size: 1rem;
+    
 
-    @media (min-width: 540px) {
-      width: 12rem;
-      padding: 1rem 0;
+    .summary-title {
+      color: $base-color;
+      padding: 0.3rem 0.8rem;
+      font-size: 1.4rem;
+      display: inline;
+      text-align: left;
     }
+    
   }
+  
 
-  section {
+  summary::-webkit-details-marker {
+    display: none
+  }
+  
+  summary::after {
+    content: '▼';
+    padding-bottom: 0.5rem;
+  }
+  details[open] summary:after {
+    content: "▲";
+  }
+  
+
+  .summary-utbildningar {
     min-height: 1.5rem;
     margin: 0.7rem 0;
     padding: 0 0.5rem;
@@ -53,20 +61,17 @@ $text-lt: #fff;
     }
   }
 
-  .more-info-link {
-    text-decoration: none;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: $base-color;
-    background-color: $base-color-lt;
-    padding: 0.5rem;
-    border-radius: 3px;
-    display: inline-block;
-
-    &:hover {
-      background-color: $base-color;
-      color: $text-lt;
-    }
+  .details-container {
+    border: 1px solid #b68da3;
+    border-top: 1px solid $base-color-lt;
   }
+
+
+  .flex-wrapper {
+    text-align: left;
+    margin: 0.5rem 0.9rem;
+    
+  }
+
+  
 }
