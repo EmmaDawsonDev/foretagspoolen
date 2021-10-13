@@ -1,4 +1,4 @@
-$base-color: #662246;
+$base-color: #622246;
 $text-lt: #fff;
 
 header {
@@ -15,7 +15,7 @@ header {
     position: absolute;
     top: 1rem;
     left: 1rem;
-    @media (max-width: 374px) {
+    @media (max-width: 540px) {
       width: 2rem;
     height: 2rem;
     top: 0.5rem;

@@ -1,7 +1,7 @@
 import React from "react";
 
 import "./the-header.scss";
-import ITHSLogo from '../../assets/ithslogga.jpg'
+import ITHSLogo from '../../assets/ithslogga.png'
 
 const TheHeader = ({ title }) => {
   return (
