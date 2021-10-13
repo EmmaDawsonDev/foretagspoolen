@@ -3,6 +3,45 @@
   max-width: 700px;
   margin: 0 auto;
 
+  &__logged-out {
+    margin-top: 3rem;
+
+    h3 {
+      margin-bottom: 2rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 90%;
+      max-width: 300px;
+      margin: auto;
+      justify-content: center;
+
+      label {
+        align-self: flex-start;
+      }
+
+      input {
+        padding: 0.3rem;
+        background-color: #F7F4F5;
+        width: 100%;
+        border: 1px solid #b68da3;
+        margin-bottom: 1rem;
+      }
+
+      button {
+        background-color: #622246;
+        color: #fff;
+        &:hover {
+          background-color: #b68da3;
+          color: #000;
+          transform: scale(1.01);
+        }
+      }
+    }
+  }
+
   .search {
     margin: 1.5rem 0;
     text-align: left;
