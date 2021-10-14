@@ -23,13 +23,13 @@ const AdminCompanyCard = ({ data, toggleModal }) => {
           <p>
             <strong>Hemsida: </strong>
             <a href={data.hemsida} rel="noreferrer" target="_blank">
-              {" "}
+              {' '}
               {data.hemsida}
             </a>
           </p>
           <p>
             <strong>ITHS Matchar: </strong>
-            {data.ITHSMatchar ? "Ja" : "Nej"}
+            {data.ITHSMatchar ? 'Ja' : 'Nej'}
           </p>
           <p>
             <strong>Kontakt epost: </strong>
@@ -38,7 +38,7 @@ const AdminCompanyCard = ({ data, toggleModal }) => {
           <p>
             <strong>Kontakt webbsida: </strong>
             <a href={data.kontaktWebbsida} rel="noreferrer" target="_blank">
-              {" "}
+              {' '}
               {data.kontaktWebbsida}
             </a>
           </p>
@@ -48,7 +48,11 @@ const AdminCompanyCard = ({ data, toggleModal }) => {
           </p>
           <p>
             <strong>Synlig för studerande: </strong>
-            {data.synlig ? "Ja" : "Nej"}
+            {data.synlig ? 'Ja' : 'Nej'}
+          </p>
+          <p>
+            <strong>Anteckningar: </strong>
+            {data.anteckningar}
           </p>
         </section>
       </div>
@@ -61,7 +65,7 @@ const AdminCompanyCard = ({ data, toggleModal }) => {
         </BaseButton>
       </div>
     </li>
-  );
+  )
 };
 
 export default AdminCompanyCard;
