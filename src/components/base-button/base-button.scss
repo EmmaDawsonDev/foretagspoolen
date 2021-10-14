@@ -13,7 +13,8 @@ button {
   border: none;
   border-radius: 3px;
   &.base {
-    background-color: #a0527b;
+    background-color: #903368;
+    color: $text-lt;
 
     &:hover,
     &:focus {
