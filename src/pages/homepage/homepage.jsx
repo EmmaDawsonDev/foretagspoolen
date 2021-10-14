@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from 'react'
 
-import TheHeader from "../../components/the-header/the-header";
-import CompanyList from "../../components/company-list/company-list";
-import SearchBar from "../../components/search-bar/search-bar";
-import FilterDropdown from "../../components/filter-dropdown/filter-dropdown";
-import SortDropdown from "../../components/sort-dropdown/sort-dropdown";
+import TheHeader from '../../components/the-header/the-header'
+import CompanyList from '../../components/company-list/company-list'
+import SearchBar from '../../components/search-bar/search-bar'
+import FilterDropdown from '../../components/filter-dropdown/filter-dropdown'
+import SortDropdown from '../../components/sort-dropdown/sort-dropdown'
 
-import "./homepage.scss";
+import './homepage.scss'
 
-const Homepage = (props) => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filterByCourse, setFilterByCourse] = useState("");
-  const [sortBy, setSortBy] = useState("A-Ö");
+const Homepage = props => {
+  const [searchTerm, setSearchTerm] = useState('')
+  const [filterByCourse, setFilterByCourse] = useState('')
+  const [sortBy, setSortBy] = useState('A-Ö')
   const [loggedInUser, setLoggedInUser] = useState(false)
+
+  const loginRef = useRef()
 
   const setSearch = e => {
     setSearchTerm(e.target.value)
@@ -54,15 +56,32 @@ const Homepage = (props) => {
     filteredAndSorted = filteredCompanies.sort((a, b) => b.timestamp - a.timestamp)
   }
 
+  const handleLogin = e => {
+    e.preventDefault()
+    console.log(loginRef.current.value)
+    if (loginRef.current.value === 'iths21') {
+      sessionStorage.setItem('loggedInToFP', 'true')
+      setLoggedInUser(true)
+    }
+  }
+
+  //Hooks
+  useEffect(() => {
+    const isLoggedInUser = sessionStorage.getItem('loggedInToFP')
+    if (isLoggedInUser === 'true') {
+      setLoggedInUser(true)
+    }
+  }, [])
+
   return (
     <React.Fragment>
       <TheHeader title="Företagspoolen" />
       {!loggedInUser && (
         <main className="homepage-wrapper__logged-out">
           <h3>Den här sidan är lösenordsskyddad</h3>
-          <form>
+          <form onSubmit={handleLogin}>
             <label htmlFor="userPassword">Lösenord:</label>
-            <input id="userPassword" type="password" />
+            <input id="userPassword" type="password" ref={loginRef} />
             <button>Login</button>
           </form>
         </main>
@@ -80,6 +99,6 @@ const Homepage = (props) => {
       )}
     </React.Fragment>
   )
-};
+}
 
-export default Homepage;
+export default Homepage
