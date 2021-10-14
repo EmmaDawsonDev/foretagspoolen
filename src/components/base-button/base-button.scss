@@ -1,7 +1,7 @@
 $base-color: #622246;
 $base-color-lt: #F7F4F5;
 $text-lt: #fff;
-$danger: #ff9db2;
+$danger: #965e88;
 
 button {
   padding: 0.5rem;
@@ -13,7 +13,7 @@ button {
   border: none;
   border-radius: 3px;
   &.base {
-    background-color: #b68da3;
+    background-color: #a0527b;
 
     &:hover,
     &:focus {
@@ -22,11 +22,12 @@ button {
     }
   }
   &.danger {
-    background-color: $danger;
+    background-color: $base-color;
+    color: #fff;
 
     &:hover,
     &:focus {
-      background-color: #a51635;
+      background-color: #512342;
       color: $text-lt;
     }
   }
