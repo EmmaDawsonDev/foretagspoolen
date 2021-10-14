@@ -3,6 +3,10 @@ import React from 'react'
 import './company.scss'
 
 const Company = ({ data }) => {
+  
+  const date = new Date(data.timestamp)
+  const dateString = date.toString()
+
   return (
     <li className="company-item">
       <details>
@@ -77,6 +81,13 @@ const Company = ({ data }) => {
                 </a>
               </section>
             ) : null}
+
+            <section className="updated flex-wrapper">
+              <p>
+                <strong>Senast uppdaterad: </strong>
+                {dateString}
+              </p>
+            </section>
           </section>
         </div>
       </details>
