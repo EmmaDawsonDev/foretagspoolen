@@ -12,6 +12,7 @@ button {
   font-weight: bold;
   border: none;
   border-radius: 3px;
+  cursor: pointer;
   &.base {
     background-color: #903368;
     color: $text-lt;

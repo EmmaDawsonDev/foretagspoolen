@@ -49,10 +49,7 @@ const AdminCompanyCard = ({ data, toggleModal }) => {
               </a>
             )}
           </p>
-          <p>
-            <strong>Senast uppdaterad: </strong>
-            {dateString}
-          </p>
+
           <p>
             <strong>Synlig för studerande: </strong>
             {data.synlig ? 'Ja' : 'Nej'}
@@ -60,6 +57,10 @@ const AdminCompanyCard = ({ data, toggleModal }) => {
           <p>
             <strong>Anteckningar: </strong>
             {data.anteckningar}
+          </p>
+          <p>
+            <strong>Senast uppdaterad: </strong>
+            {dateString}
           </p>
         </section>
       </div>
