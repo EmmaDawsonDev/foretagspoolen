@@ -25,10 +25,8 @@ const ModalAdd = ({ currentCompany, toggleModal, type, updateDBError }) => {
   const [ITHSMatcharBeskrivning, setITHSMatcharBeskrivning] = useState(
     currentCompany.ITHSMatcharBeskrivning || ""
   );
-  const [senastKontaktad, setSenastKontaktad] = useState(
-    currentCompany.senastKontaktad || new Date().toLocaleDateString()
-  );
-  const [synlig, setSynlig] = useState(currentCompany.synlig || true);
+  
+  const [synlig, setSynlig] = useState(currentCompany.synlig || true)
 
   const [anteckningar, setAnteckningar] = useState(currentCompany.anteckningar || '')
 
@@ -78,10 +76,6 @@ const ModalAdd = ({ currentCompany, toggleModal, type, updateDBError }) => {
     setITHSMatcharBeskrivning(e.target.value)
   }
 
-  const handleSenastKontaktad = e => {
-    setSenastKontaktad(e.target.value)
-  }
-
   const handleSynlig = e => {
     if (e.target.value === 'ja') {
       setSynlig(true)
@@ -103,7 +97,6 @@ const ModalAdd = ({ currentCompany, toggleModal, type, updateDBError }) => {
     kontaktEpost,
     kontaktWebbsida,
     ort,
-    senastKontaktad,
     utbildningar,
     synlig,
     anteckningar,
@@ -226,12 +219,6 @@ const ModalAdd = ({ currentCompany, toggleModal, type, updateDBError }) => {
           value={ITHSMatcharBeskrivning}
           onChange={handleITHSMatcharBeskrivning}
         ></textarea>
-      </section>
-
-      <section className="form-section">
-        <label htmlFor="senastKontaktad">Senast kontaktad:</label>
-
-        <input type="date" id="senastKontaktad" name="senastKontaktad" value={senastKontaktad} onChange={handleSenastKontaktad} required />
       </section>
 
       <section className="form-section">

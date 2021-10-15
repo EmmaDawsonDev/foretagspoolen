@@ -5,7 +5,8 @@ import './company.scss'
 const Company = ({ data }) => {
   
   const date = new Date(data.timestamp)
-  const dateString = date.toString()
+  const dateArray = date.toString().split(' ')
+  const dateString = dateArray.slice(0, 5).join(' ')
 
   return (
     <li className="company-item">
