@@ -1,0 +1,32 @@
+.info-modal {
+  background-color: #fff;
+  width: 18rem;
+  padding: 2rem;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .flex-row {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  @media (min-width: 540px) {
+    width: 30rem;
+  }
+
+  button {
+    &:hover,
+    &:focus {
+      background-color: #5c5c5c;
+      color: #fff;
+    }
+  }
+
+  
+}

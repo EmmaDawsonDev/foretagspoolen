@@ -1,64 +1,47 @@
-import React, { useState } from "react";
-//import * as Firebase from "./firebase/firebase.utils";
+import React, { useState } from 'react'
 
-import TheHeader from "../../components/the-header/the-header";
+import TheHeader from '../../components/the-header/the-header'
 
-import "./login.scss";
+import './login.scss'
 
 const LoginPage = ({ handleSubmit, loginError }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
-  const handleChange = (e) => {
-    const { value, name } = e.target;
-    if (name === "email") {
-      setEmail(value);
+  const handleChange = e => {
+    const { value, name } = e.target
+    if (name === 'email') {
+      setEmail(value)
     }
-    if (name === "password") {
-      setPassword(value);
+    if (name === 'password') {
+      setPassword(value)
     }
-  };
+  }
 
   return (
     <React.Fragment>
       <TheHeader title="Login" />
 
       <main className="sign-in">
-        <form onSubmit={(e) => handleSubmit(e, email, password)}>
+        <form onSubmit={e => handleSubmit(e, email, password)}>
           <section className="email">
             <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={email}
-              onChange={handleChange}
-              required
-            />
+            <input type="email" id="email" name="email" value={email} onChange={handleChange} required />
           </section>
 
           <section className="password">
             <label htmlFor="password">Lösenord</label>
-            <input
-              type="password"
-              id="password"
-              name="password"
-              value={password}
-              onChange={handleChange}
-              required
-            />
+            <input type="password" id="password" name="password" value={password} onChange={handleChange} required />
           </section>
 
           <button className="base" type="submit">
             Logga In
           </button>
-          {loginError ? (
-            <p className="error">Email och lösenord matchar inte</p>
-          ) : null}
+          {loginError ? <p className="error">Email och lösenord matchar inte</p> : null}
         </form>
       </main>
     </React.Fragment>
-  );
-};
+  )
+}
 
-export default LoginPage;
+export default LoginPage

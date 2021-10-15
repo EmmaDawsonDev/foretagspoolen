@@ -4,6 +4,9 @@ $base-color: #622246;
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  &:focus {
+    outline: 2px solid orange;  
+  }
 }
 
 body {

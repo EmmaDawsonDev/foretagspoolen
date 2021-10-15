@@ -85,28 +85,7 @@ function App() {
       })
   }
 
-  // const addCompanyData = (newCompany) => {
-  //   const updatedCompanyData = [...companyData, newCompany];
-  //   sessionStorage.setItem("companyData", JSON.stringify(updatedCompanyData));
-  //   setCompanyData(updatedCompanyData);
-  // };
-
-  // const updateCompanyData = (updatedCompany) => {
-  //   const removeUpdated = companyData.filter(
-  //     (company) => company.namn !== updatedCompany.namn
-  //   );
-  //   const updatedCompanyData = [...removeUpdated, updatedCompany];
-  //   sessionStorage.setItem("companyData", JSON.stringify(updatedCompanyData));
-  //   setCompanyData(updatedCompanyData);
-  // };
-
-  // const deleteCompanyData = (deletedCompanyId) => {
-  //   const updatedCompanyData = companyData.filter(
-  //     (company) => company.id !== deletedCompanyId
-  //   );
-  //   sessionStorage.setItem("companyData", JSON.stringify(updatedCompanyData));
-  //   setCompanyData(updatedCompanyData);
-  // };
+  
 
   return (
     <div className="App">
@@ -130,9 +109,6 @@ function App() {
                 {...props}
                 companyData={companyData}
                 isLoggedIn={isLoggedIn}
-                // addCompanyData={addCompanyData}
-                // updateCompanyData={updateCompanyData}
-                // deleteCompanyData={deleteCompanyData}
                 readDatabase={readDatabase}
                 handleSignout={handleSignout}
               />

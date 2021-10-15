@@ -5,6 +5,7 @@ import CompanyList from '../../components/company-list/company-list'
 import SearchBar from '../../components/search-bar/search-bar'
 import FilterDropdown from '../../components/filter-dropdown/filter-dropdown'
 import SortDropdown from '../../components/sort-dropdown/sort-dropdown'
+import Info from '../../components/info/info'
 
 import './homepage.scss'
 
@@ -84,6 +85,7 @@ const Homepage = props => {
             <input id="userPassword" type="password" ref={loginRef} />
             <button>Login</button>
           </form>
+          <Info />
         </main>
       )}
 
@@ -95,6 +97,7 @@ const Homepage = props => {
             <SortDropdown sortCourses={sortCourses} />
           </section>
           {filteredCompanies.length > 0 ? <CompanyList companyData={filteredAndSorted} /> : <h6>Inga resultat</h6>}
+          <Info />
         </main>
       )}
     </React.Fragment>

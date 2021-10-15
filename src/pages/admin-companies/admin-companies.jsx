@@ -13,35 +13,34 @@ import * as Firebase from "../../firebase/firebase.utils";
 
 import "./admin-companies.scss";
 
-const AdminCompanies = ({
-  companyData,
-  // addCompanyData,
-  // updateCompanyData,
-  // deleteCompanyData,
-  readDatabase,
-  handleSignout,
-}) => {
-  const [currentCompany, setCurrentCompany] = useState({});
-  const [adminSearchTerm, setAdminSearchTerm] = useState("");
-  const [adminSortBy, setAdminSortBy] = useState("A-Ö");
-  const [filterByCompany, setFilterByCompany] = useState("");
-  const [modalOpen, setModalOpen] = useState(false);
-  const [addModalOpen, setAddModalOpen] = useState(false);
-  const [editModalOpen, setEditModalOpen] = useState(false);
-  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-  const [updateDBError, setUpdateDBError] = useState("");
+const AdminCompanies = ({ companyData, readDatabase, handleSignout }) => {
+  const [currentCompany, setCurrentCompany] = useState({})
+  const [adminSearchTerm, setAdminSearchTerm] = useState('')
+  const [adminSortBy, setAdminSortBy] = useState('A-Ö')
+  const [filterByCompany, setFilterByCompany] = useState('')
+  const [modalOpen, setModalOpen] = useState(false)
+  const [addModalOpen, setAddModalOpen] = useState(false)
+  const [editModalOpen, setEditModalOpen] = useState(false)
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false)
+  const [updateDBError, setUpdateDBError] = useState('')
 
-  const setSearch = (e) => {
-    setAdminSearchTerm(e.target.value);
-  };
+  const setSearch = e => {
+    setAdminSearchTerm(e.target.value)
+  }
 
-  const filterCompanies = (e) => {
-    setFilterByCompany(e.target.value);
-  };
+  const filterCompanies = e => {
+    setFilterByCompany(e.target.value)
+  }
 
-  const sortCourses = (e) => {
-    setAdminSortBy(e.target.value);
-  };
+  const sortCourses = e => {
+    setAdminSortBy(e.target.value)
+  }
+
+  window.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      setModalOpen(false)
+    }
+  })
 
   //Filter by search term
   const filteredCompaniesBySearch = companyData.filter(
@@ -51,208 +50,168 @@ const AdminCompanies = ({
   )
 
   // Filter by filter term
-  let filteredCompaniesByFilter = filteredCompaniesBySearch;
-  if (filterByCompany === "IngenUtbildning") {
-    filteredCompaniesByFilter = filteredCompaniesBySearch.filter(
-      (company) => company.utbildningar.length === 0
-    );
+  let filteredCompaniesByFilter = filteredCompaniesBySearch
+  if (filterByCompany === 'IngenUtbildning') {
+    filteredCompaniesByFilter = filteredCompaniesBySearch.filter(company => company.utbildningar.length === 0)
   }
-  if (filterByCompany === "ITHSMatchar") {
-    filteredCompaniesByFilter = filteredCompaniesBySearch.filter(
-      (company) => company.ITHSMatchar === true
-    );
+  if (filterByCompany === 'ITHSMatchar') {
+    filteredCompaniesByFilter = filteredCompaniesBySearch.filter(company => company.ITHSMatchar === true)
   }
-  if (filterByCompany === "Osynlig") {
-    filteredCompaniesByFilter = filteredCompaniesBySearch.filter(
-      (company) => company.synlig === false
-    );
+  if (filterByCompany === 'Osynlig') {
+    filteredCompaniesByFilter = filteredCompaniesBySearch.filter(company => company.synlig === false)
   }
-  if (
-    ["WU", "ITP", "FEU", ".NET", "JAVA", "JSU", "APP", "TEST"].includes(
-      filterByCompany
-    )
-  ) {
-    filteredCompaniesByFilter = filteredCompaniesBySearch.filter((company) =>
-      company.utbildningar.includes(filterByCompany)
-    );
+  if (['WU', 'ITP', 'FEU', '.NET', 'JAVA', 'JSU', 'APP', 'TEST'].includes(filterByCompany)) {
+    filteredCompaniesByFilter = filteredCompaniesBySearch.filter(company => company.utbildningar.includes(filterByCompany))
   }
 
   //Sort filtered company list
-  let filteredAndSorted = "";
+  let filteredAndSorted = ''
 
-  if (adminSortBy === "A-Ö") {
-    filteredAndSorted = filteredCompaniesByFilter.sort((a, b) =>
-      a.namn.localeCompare(b.namn)
-    );
+  if (adminSortBy === 'A-Ö') {
+    filteredAndSorted = filteredCompaniesByFilter.sort((a, b) => a.namn.localeCompare(b.namn))
   }
-  if (adminSortBy === "Ö-A") {
-    filteredAndSorted = filteredCompaniesByFilter.sort((a, b) =>
-      b.namn.localeCompare(a.namn)
-    );
+  if (adminSortBy === 'Ö-A') {
+    filteredAndSorted = filteredCompaniesByFilter.sort((a, b) => b.namn.localeCompare(a.namn))
   }
-  if (adminSortBy === "timestamp") {
-    filteredAndSorted = filteredCompaniesByFilter.sort(
-      (a, b) => b.timestamp - a.timestamp
-    );
+  if (adminSortBy === 'timestamp') {
+    filteredAndSorted = filteredCompaniesByFilter.sort((a, b) => b.timestamp - a.timestamp)
   }
 
   //Open and close modal with different content
   const toggleModal = (e, data) => {
-    e.stopPropagation();
-    if (
-      e.target.className === "modal-background" ||
-      e.target.className === "grey" ||
-      e.target.className === "close-modal-button"
-    ) {
-      setAddModalOpen(false);
-      setEditModalOpen(false);
-      setDeleteModalOpen(false);
-      setCurrentCompany({});
-      setModalOpen(!modalOpen);
+    e.stopPropagation()
+    if (e.target.className === 'modal-background' || e.target.className === 'grey' || e.target.className === 'close-modal-button') {
+      setAddModalOpen(false)
+      setEditModalOpen(false)
+      setDeleteModalOpen(false)
+      setCurrentCompany({})
+      setModalOpen(!modalOpen)
     }
-    if (e.target.innerText === "LÄGG TILL FÖRETAGET") {
-      let alreadyExists = companyData.find(
-        (company) => company.namn.toLowerCase() === data.namn.toLowerCase()
-      );
+    if (e.target.innerText === 'LÄGG TILL FÖRETAGET') {
+      let alreadyExists = companyData.find(company => company.namn.toLowerCase() === data.namn.toLowerCase())
 
       if (!alreadyExists) {
         Firebase.db
-          .collection("companies")
+          .collection('companies')
           .add(data)
-          .then((docRef) => {
-            data.id = docRef.id;
+          .then(docRef => {
+            data.id = docRef.id
 
             // addCompanyData(data);
-            readDatabase();
-            console.log("Document created with id:", docRef.id);
-            setAddModalOpen(false);
-            setEditModalOpen(false);
-            setDeleteModalOpen(false);
-            setCurrentCompany({});
-            setModalOpen(!modalOpen);
+            readDatabase()
+            console.log('Document created with id:', docRef.id)
+            setAddModalOpen(false)
+            setEditModalOpen(false)
+            setDeleteModalOpen(false)
+            setCurrentCompany({})
+            setModalOpen(!modalOpen)
           })
-          .catch((err) => {
-            setUpdateDBError("Någonting gick fel ", err);
-            console.log(err);
-          });
+          .catch(err => {
+            setUpdateDBError('Någonting gick fel ', err)
+            console.log(err)
+          })
       } else {
         Firebase.db
-          .collection("companies")
+          .collection('companies')
           .doc(alreadyExists.id)
           .set(data)
           .then(() => {
-            data.id = alreadyExists.id;
+            data.id = alreadyExists.id
 
             // updateCompanyData(data);
-            readDatabase();
-            console.log("Document updated successfully");
-            setAddModalOpen(false);
-            setEditModalOpen(false);
-            setDeleteModalOpen(false);
-            setCurrentCompany({});
-            setModalOpen(!modalOpen);
+            readDatabase()
+            console.log('Document updated successfully')
+            setAddModalOpen(false)
+            setEditModalOpen(false)
+            setDeleteModalOpen(false)
+            setCurrentCompany({})
+            setModalOpen(!modalOpen)
           })
-          .catch((err) => {
-            setUpdateDBError("Någonting gick fel ", err);
-            console.log(err);
-          });
+          .catch(err => {
+            setUpdateDBError('Någonting gick fel ', err)
+            console.log(err)
+          })
       }
     }
 
-    if (e.target.innerText === "SPARA ÄNDRINGAR") {
+    if (e.target.innerText === 'SPARA ÄNDRINGAR') {
       Firebase.db
-        .collection("companies")
+        .collection('companies')
         .doc(data.id)
         .set(data)
         .then(() => {
-          readDatabase();
-          console.log("Document updated successfully");
-          setAddModalOpen(false);
-          setEditModalOpen(false);
-          setDeleteModalOpen(false);
-          setCurrentCompany({});
-          setModalOpen(!modalOpen);
+          readDatabase()
+          console.log('Document updated successfully')
+          setAddModalOpen(false)
+          setEditModalOpen(false)
+          setDeleteModalOpen(false)
+          setCurrentCompany({})
+          setModalOpen(!modalOpen)
         })
-        .catch((err) => {
-          setUpdateDBError("Någonting gick fel ", err);
-          console.log(err);
-        });
+        .catch(err => {
+          setUpdateDBError('Någonting gick fel ', err)
+          console.log(err)
+        })
     }
 
-    if (e.target.innerText === "JA - RADERA") {
+    if (e.target.innerText === 'JA - RADERA') {
       Firebase.db
-        .collection("companies")
+        .collection('companies')
         .doc(data.id)
         .delete()
         .then(() => {
-          readDatabase();
-          console.log("Document deleted successfully");
-          setAddModalOpen(false);
-          setEditModalOpen(false);
-          setDeleteModalOpen(false);
-          setCurrentCompany({});
-          setModalOpen(!modalOpen);
+          readDatabase()
+          console.log('Document deleted successfully')
+          setAddModalOpen(false)
+          setEditModalOpen(false)
+          setDeleteModalOpen(false)
+          setCurrentCompany({})
+          setModalOpen(!modalOpen)
         })
-        .catch((err) => {
-          setUpdateDBError("Någonting gick fel ", err);
-          console.log(err);
-        });
+        .catch(err => {
+          setUpdateDBError('Någonting gick fel ', err)
+          console.log(err)
+        })
     }
 
-    if (e.target.innerText === "LÄGG TILL FÖRETAG") {
-      setAddModalOpen(true);
-      setModalOpen(!modalOpen);
+    if (e.target.innerText === 'LÄGG TILL FÖRETAG') {
+      setAddModalOpen(true)
+      setModalOpen(!modalOpen)
     }
-    if (e.target.innerText === "REDIGERA") {
-      handleCurrentCompany(data);
-      setEditModalOpen(true);
+    if (e.target.innerText === 'REDIGERA') {
+      handleCurrentCompany(data)
+      setEditModalOpen(true)
       //setAddModalOpen(true);
-      setModalOpen(!modalOpen);
+      setModalOpen(!modalOpen)
     }
-    if (e.target.innerText === "RADERA") {
-      setDeleteModalOpen(true);
-      handleCurrentCompany(data);
-      setModalOpen(!modalOpen);
+    if (e.target.innerText === 'RADERA') {
+      setDeleteModalOpen(true)
+      handleCurrentCompany(data)
+      setModalOpen(!modalOpen)
     }
-  };
+  }
 
   //To know which company you want to edit/delete:
-  const handleCurrentCompany = (data) => {
-    setCurrentCompany({ ...data });
-  };
+  const handleCurrentCompany = data => {
+    setCurrentCompany({ ...data })
+  }
 
   return (
     <div>
       {modalOpen ? (
         <ModalBackground toggleModal={toggleModal}>
           {addModalOpen ? (
-            <AddModal
-              toggleModal={toggleModal}
-              currentCompany={currentCompany}
-              type="add"
-              updateDBError={updateDBError}
-            />
+            <AddModal toggleModal={toggleModal} currentCompany={currentCompany} type="add" updateDBError={updateDBError} />
           ) : null}
           {editModalOpen ? (
-            <AddModal
-              toggleModal={toggleModal}
-              currentCompany={currentCompany}
-              type="edit"
-              updateDBError={updateDBError}
-            />
+            <AddModal toggleModal={toggleModal} currentCompany={currentCompany} type="edit" updateDBError={updateDBError} />
           ) : null}
-          {deleteModalOpen ? (
-            <DeleteModal
-              toggleModal={toggleModal}
-              currentCompany={currentCompany}
-              updateDBError={updateDBError}
-            />
-          ) : null}
+          {deleteModalOpen ? <DeleteModal toggleModal={toggleModal} currentCompany={currentCompany} updateDBError={updateDBError} /> : null}
         </ModalBackground>
       ) : null}
       <TheHeader title="Admin" />
       <main className="admin-wrapper">
-        <button className="log-out-btn" onClick={(e) => handleSignout(e)}>
+        <button className="log-out-btn" onClick={e => handleSignout(e)}>
           Log out
         </button>
         <section className="search-wrapper">
@@ -269,17 +228,13 @@ const AdminCompanies = ({
           </section>
         </section>
         {companyData ? (
-          <AdminCompanyList
-            companyData={filteredAndSorted}
-            toggleModal={toggleModal}
-            handleCurrentCompany={handleCurrentCompany}
-          />
+          <AdminCompanyList companyData={filteredAndSorted} toggleModal={toggleModal} handleCurrentCompany={handleCurrentCompany} />
         ) : (
           <h6>Loading...</h6>
         )}
       </main>
     </div>
-  );
-};
+  )
+}
 
 export default AdminCompanies;
