@@ -49,6 +49,10 @@ const AdminCompanyCard = ({ data, toggleModal }) => {
               </a>
             )}
           </p>
+          <p>
+            <strong>Ort: </strong>
+            {data.ort}
+          </p>
 
           <p>
             <strong>Synlig för studerande: </strong>

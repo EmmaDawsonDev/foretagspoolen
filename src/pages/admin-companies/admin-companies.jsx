@@ -44,9 +44,11 @@ const AdminCompanies = ({
   };
 
   //Filter by search term
-  const filteredCompaniesBySearch = companyData.filter((company) =>
-    company.namn.toLowerCase().includes(adminSearchTerm.toLowerCase())
-  );
+  const filteredCompaniesBySearch = companyData.filter(
+    company =>
+      company.namn.toLowerCase().includes(adminSearchTerm.toLowerCase()) ||
+      company.ort.toLowerCase().includes(adminSearchTerm.toLowerCase())
+  )
 
   // Filter by filter term
   let filteredCompaniesByFilter = filteredCompaniesBySearch;

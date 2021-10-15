@@ -33,8 +33,8 @@ const Homepage = props => {
   const filterCompaniesByVisible = props.companyData.filter(company => company.synlig === true)
 
   //Match by search term
-  const filteredCompaniesBySearch = filterCompaniesByVisible.filter(company =>
-    company.namn.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredCompaniesBySearch = filterCompaniesByVisible.filter(
+    company => company.namn.toLowerCase().includes(searchTerm.toLowerCase()) || company.ort.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   //Match by course
